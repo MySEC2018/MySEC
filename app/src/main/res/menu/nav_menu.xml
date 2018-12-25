@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Home">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/homeicon"
+        android:title="Home" />
+    <item
+        android:id="@+id/web"
+        android:icon="@drawable/webicon"
+        android:title="SEC website" />
+    <!--<item
+        android:id="@+id/map"
+        android:icon="@drawable/mapicon"
+        android:title="Campus Location" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/settingicon"
+        android:title="setting" />
+    <item
+        android:id="@+id/admission"
+        android:icon="@drawable/admission"
+        android:title="SEC Admission Desk" />
+    <item
+        android:id="@+id/admissiontest"
+        android:icon="@drawable/skill"
+        android:title="Check Your Skill" />
+    <item
+        android:id="@+id/trans"
+        android:icon="@drawable/trans"
+        android:title="Transportation" />-->
+    <item
+        android:id="@+id/adnews"
+        android:icon="@drawable/admissionnews"
+        android:title="Campus News" />
+    <item
+        android:id="@+id/teacherslist"
+        android:icon="@drawable/admissionnews"
+        android:title="Teacher List" />
+    <item
+        android:id="@+id/syllabus"
+        android:icon="@drawable/admissionnews"
+        android:title="Syllabus"
+        />
+    <item
+        android:id="@+id/holidays"
+        android:icon="@drawable/holiday"
+        android:title="Holidays" />
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/shareicon"
+        android:title="Share" />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/developer"
+        android:title="Developer" />
+    <item
+        android:id="@+id/exit"
+        android:icon="@drawable/exit"
+        android:title="Exit" />
+</menu>

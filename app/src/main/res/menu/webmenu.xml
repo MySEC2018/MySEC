@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Web"
+    >
+
+    <item app:showAsAction="always"
+        android:title="back"
+        android:icon="@drawable/back"
+        android:id="@+id/webback"
+        />
+    <item app:showAsAction="always"
+        android:title="forward"
+        android:icon="@drawable/forward"
+        android:id="@+id/webforward"
+        />
+    <item app:showAsAction="always"
+        android:title="home"
+        android:icon="@drawable/homeicon"
+        android:id="@+id/webhome"
+        />
+    <item android:title="Refresh"
+        android:icon="@drawable/refresh"
+        android:id="@+id/webrefresh"
+        />
+    <item android:title="Share page"
+        android:icon="@drawable/shareicon"
+        android:id="@+id/webshare"
+        />
+</menu>

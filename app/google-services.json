@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "688921586544",
+    "firebase_url": "https://mysecnews-5df86.firebaseio.com",
+    "project_id": "mysecnews-5df86",
+    "storage_bucket": "mysecnews-5df86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688921586544:android:b7ff75bc23f10c90",
+        "android_client_info": {
+          "package_name": "com.example.admin.mysecazadshushil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688921586544-qhpv9igkats0c68oah2isvv6ea4jaos8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.admin.mysecazadshushil",
+            "certificate_hash": "61f80c0308e085ef8c3df80037d1668946d53568"
+          }
+        },
+        {
+          "client_id": "688921586544-ms3uvi15kf1ktsf7a636o2ulu0ob2bvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4zUeCmaDDzYR0B4kXqcaK3gmTVhBR0rg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688921586544-ms3uvi15kf1ktsf7a636o2ulu0ob2bvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

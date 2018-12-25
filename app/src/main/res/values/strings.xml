@@ -1,0 +1,89 @@
+<resources>
+    <array name="dept">
+        <item>CSE</item>
+        <item>EEE</item>
+        <item>CE</item>
+    </array>
+    <string name="app_name">MySEC</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="mysecdescrip">Sylhet Engineering College (SEC) established in the year 2007 under the School of Applied Sciences And Technology, Shahjalal University of Science and Technology, is best of its kind with a motto to produce the best in class engineers for the 21st century. As a divisional city of Bangladesh, Sylhet had no full fledged undergraduate level engineering institute. So the Government of Peoples Republic of Bangladesh has established Sylhet Engineering College as an engineering faculty section of Shahjalal University of Science and Technology.
+        With a state-of-the-art facilities and a marvelous landscape of campus, Sylhet Engineering College has become an engineering educational hub of Bangladesh.</string>
+    <string name="mysecdescrip2">
+    The campus includes three large academic buildings, library and computer center, admin building, the principal quarter, teachers and stuff quarters. There are two male students dormitories and a female students dormitory.
+There are currently three departments offering B.Sc in Engineering degree , that includes:
+    </string>
+    <string name="mysecdescrip3">- Department of Computer Science and Engineering</string>
+    <string name="mysecdescrip4">- Department of Electrical and Electronics Engineering</string>
+    <string name="mysecdescrip5">- Department of Civil Engineering</string>
+    <string name="mysecdescrip6">It is expected that, Sylhet Engineering College will be upgraded to a full-fledged public university and will be named Sylhet University of Engineering and Technology (SUET).</string>
+
+
+    <string name="trans1">লোকেশনঃ </string>
+    <string name="trans2">সিলেট ইঞ্জিনিয়ারিং কলেজ,আলুরতল রোড,টিলাগড়,সিলেট-৩১০০</string>
+    <string name="trans3">সিলেট আসতে যত সময় লাগেঃ </string>
+
+
+    <string name="trans4">যারা ঢাকা থেকে সিলেট আসবা তারা রাত ১২.৩০ অথবা রাত ১.০০ টার বাসে আসবা।
+  কারণ, ঢাকা থেকে সিলেট আসতে সময় লাগে ৫-৬ ঘন্টা।
+ তাই কেউ যদি রাত ৯,১০,১১  টার বাসে আস তাহলে তোমাদের অনেক সময় বাসের কাউন্টারে বসে থাকতে হবে।
+ তাই ১২.৩০ অথবা ১.০০ টাই পারফেক্ট সময়। দেশের উত্তরবঙ্গ থেকে আসবা তারা রাত  ৯-১০ টার বাসে আসতে পার।
+আর যারা চট্টগ্রাম-কুমিল্লা থেকে আসবে তাদের জন্য  পারফেক্ট সময় রাত ১০-১১ টা।
+ যশোর-খুলনা থেকেও রাত ৯-১০ টা পারফেক্ট সময়।  বরিশাল থেকেও রাত ৯-১০ টায় আসা যেতে পারে।
+যারা ট্রেন আসার  চিন্তা-ভাবনা করছ, তাদের বলব রাতের ট্রেনে আসার জন্য।
+তোমাদের স্ব স্ব এলাকা থেকে রাতে যে ট্রেন সিলেট আসে সেটাই আসবা তোমরা।
+ তাহলে ভোরবেলা সিলেট  এসে নামতে পারবা।</string>
+
+
+    <string name="trans5">কিভাবে সিলেট ইঞ্জিনিয়ারিং কলেজে আসা যাবেঃ </string>
+    <string name="trans6">বাস-ট্রেন যেটাতেই আস না কেন,তোমাদের নামিয়ে দেয়া হবে কদমতলী নামক একটা জায়গায়।
+এই জায়গা থেকে রিক্সা/সিএনজি নিয়ে সরাসরি ক্যাম্পাসে  আসা যায়।
+রিক্সায় ভাড়া নিবে ৭০-৮০ টাকা। রিক্সাওয়ালাকে বলতে হবে- "
+সিলেট  ইঞ্জিনিয়ারিং কলেজে যাব। আলুরতল রোড(কৃষি ভার্সিটির পাশে) " ।
+ সিএনজি তে ভাড়া নিবে ১৫০-২০০ টাকা। বেশিও নিতে পারে। আরও কম খরচেও আসা যায়।
+ প্রথমে কদমতলী থেকে অটোতে আসতে হবে
+আম্বরখানা নামক স্থানে। ভাড়া ২০ টাকা।
+সেখান থেকে আবার অটো/সিএনজি যেতে হবে বালুচর পয়েন্ট নামক স্থানে। ভাড়া ১০ টাকা।
+এখান থেকে আবার অটোতে যেতে হবে বালুচর নয়াবাজার নামক স্থানে।
+ভাড়া ৫ টাকা। এখান থেকে পায়ে হেটে কৃষি ভার্সিটির পেছনের গেট দিয়ে কৃষি ভার্সিটিতে প্রবেশ করে যেকোন গেট দিয়ে বের হয়ে
+গেলেই সিলেট  ইঞ্জিনিয়ারিং কলেজ চোখে পড়বে। মনে হয় গুলিয়ে ফেলছ। কৃষি ভার্সিটিতে প্রবেশ  করে যে কাউকে জিজ্ঞেস করলেই বলে দিবে।</string>
+
+
+    <string name="trans7">কদমতলী-->আম্বরখানা-->বালুচর পয়েন্ট-->বালুচর নয়াবাজার-->কৃষি ভার্সিটি--> সিলেট ইঞ্জিনিয়ারিং কলেজ</string>
+    <string name="trans8">আরেকটি উপায়ে যাওয়া যায়।</string>
+    <string name="trans9">কদমতলী-->আম্বরখানা-->ইকোপার্ক রোড।</string>
+
+
+    <string name="trans10">অটোওয়ালাকে আগে থেকেই বলতে হবে ইকোপার্ক যাওয়ার মোড়ে
+নামিয়ে দিবেন।
+যেখানে নামিয়ে দিবে সেখানে সিলেট ইঞ্জিনিয়ারিং কলেজের
+সাইনবোর্ড দেখা যাবে।
+সাইনবোর্ডে দেয়া ডিরেক্টশন অনুযায়ী হাটলেই --> সিলেট ইঞ্জিনিয়ারিং কলেজ
+ অনেক বাস উপশহর নামক স্থানে নামিয়ে দেয়।
+সেখান থেকে রিক্সায় সরাসরি আসা যায়। ভাড়া ৫০-৬০ টাকা।</string>
+
+
+    <string name="trans11">নগরীর বিভিন্ন পয়েন্ট থেকে আসার উপায়ঃ</string>
+    <string name="trans12">আম্বরখানাঃ </string>
+    <string name="trans13">উপরে লেখা আছে।</string>
+    <string name="trans14">টিলাগড়ঃ</string>
+    <string name="trans15">রিক্সায় সারাসরি ক্যাম্পাস। ভাড়া ২০-২৫ টাকা।</string>
+    <string name="trans16">জিন্দাবাজারঃ </string>
+    <string name="trans17">রিক্সায় ৪০-৫০ টাকা সরাসরি ক্যাম্পাস । সিএনজি তে ১০০ টাকা।</string>
+    <string name="trans18">বন্দরঃ</string>
+    <string name="trans19">১। বন্দর থেকে আম্বরখানা অটো/ সিএনজি (ভাড়া ১০ টাকা)। আম্বরখানা থেকে আসার উপায় উপরে লেখা আছে।</string>
+    <string name="trans20">২। বন্দর থেকে টিলাগর(লেগুনা-ভাড়া-৭ টাকা)। সেখান থেকে রিক্সায় সরাসরি ক্যাম্পাস।</string>
+    <string name="trans21">লামাবাজারঃ যেকোন উপায়ে
+আম্বরখানা আসলেই হবে। সেখান থেকে আসার উপায় উপরে লেখা আছে।</string>
+    <string name="trans22">শিবগঞ্জঃ সরাসরি ক্যাম্পাস(রিক্সা- ভাড়া ৩০-৩৫ টাকা)</string>
+    <string name="trans23">চৌহাট্টাঃ যেকোন উপায়ে আম্বরখানা আসলেই হবে। সেখান থেকে আসার উপায় উপরে লেখা আছে।</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="help1"><b>1.</b> Touch on any Marker </string>
+    <string name="help2"><b>Then, </b> <i>The Map dialogue box</i> will be appeared at the bottom. </string>
+    <string name="help3"><b>2.</b> For any of the Marker Direction, Touch the <b>direction icon</b>. </string>
+    <string name="help4"><b>3.</b> Please, <b>Turn On </b>the Location mode of your device. </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

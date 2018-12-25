@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Syllabus">
+    <!--<android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#ffff" />-->
+    <!--<Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="uploadfile"
+        android:id="@+id/upload_file_syl"
+        android:onClick="addFileFrgmt"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="viewfile"
+        android:id="@+id/view_file_syl"
+        android:onClick="viewFilesFrgmt"
+        />
+    <FrameLayout
+        android:id="@+id/files_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp">
+        </FrameLayout>
+        -->
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.example.admin.mysecazadshushil.Syllabus_upload_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_syllabus_upload_fragment" />
+
+        <fragment
+            android:id="@+id/fragment2"
+            android:name="com.example.admin.mysecazadshushil.Syllabus_viewfil_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_syllabus_view_files_fragment" />
+</LinearLayout>
