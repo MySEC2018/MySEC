@@ -46,16 +46,16 @@ public class Syllabus_viewfil_frag extends Fragment {
         firestoreDB = FirebaseFirestore.getInstance();
 
         filesRecyclerView = (RecyclerView) view.findViewById(R.id.files_lst);
-        createDate =  view.findViewById(R.id.create_date);
+        //createDate =  view.findViewById(R.id.create_date);
 
-        Button searchButton = (Button) view.findViewById(R.id.search_files_b);
+        //Button searchButton = (Button) view.findViewById(R.id.search_files_b);
         getFielNames();
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        /*searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFielNames();
             }
-        });
+        });*/
 
 
         LinearLayoutManager recyclerLayoutManager =
@@ -69,9 +69,9 @@ public class Syllabus_viewfil_frag extends Fragment {
         return view;
     }
     private void getFielNames(){
-        getFileNamesFromFirestoreDb(createDate.getText().toString());
+        getFileNamesFromFirestoreDb();
     }
-    private void getFileNamesFromFirestoreDb(String createDate) {
+    private void getFileNamesFromFirestoreDb() {
         firestoreDB.collection("files")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

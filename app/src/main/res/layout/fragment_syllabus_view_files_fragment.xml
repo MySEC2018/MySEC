@@ -6,30 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Syllabus">
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/create_date_lv"
-        android:layout_marginTop="4dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <EditText
-            android:id="@+id/create_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Create Date (MM/DD/YYYY)"/>
-    </android.support.design.widget.TextInputLayout>
-    <Button
-        android:id="@+id/search_files_b"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        style="@style/Widget.AppCompat.Button.Colored"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_date_lv"
-        android:text="Show Files"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/files_lst"
         android:scrollbars="vertical"
@@ -37,6 +13,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_files_b"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 </android.support.constraint.ConstraintLayout>
