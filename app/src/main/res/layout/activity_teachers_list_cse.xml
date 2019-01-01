@@ -75,6 +75,33 @@
                     android:id="@+id/tech_delete"
                     />
             </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                >
+
+                <EditText
+                    android:id="@+id/inputsearchtech"
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="30dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:background="@drawable/edittext_style_merged_focuseandnormal"
+                    android:hint="name" />
+
+                <ImageButton
+                    android:id="@+id/search_tech"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    app:srcCompat="@drawable/search"
+                    android:background="@color/MySECcolor"
+                    tools:ignore="VectorDrawableCompat" />
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

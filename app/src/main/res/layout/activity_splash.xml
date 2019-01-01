@@ -15,7 +15,7 @@
         >
     <ImageView
         android:id="@+id/logo"
-        android:src="@drawable/myseclogo"
+        android:src="@drawable/secofficial"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_gravity="center"

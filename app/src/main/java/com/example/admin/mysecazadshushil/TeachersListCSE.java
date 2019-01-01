@@ -1,6 +1,7 @@
 package com.example.admin.mysecazadshushil;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
@@ -11,7 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,6 +32,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,10 +42,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
 
 public class TeachersListCSE extends AppCompatActivity {
-private ImageButton addimage;
-EditText tname, position, contact;
+ImageButton addimage,searchbt;
+EditText tname, position, contact, insearcht;
 Button sub;
 private Uri imageUri;
 private StorageReference mstorage;
@@ -64,6 +71,8 @@ private Button delete_tech;
         sub=(Button)findViewById(R.id.tech_submit);
         getkey=(EditText)findViewById(R.id.tech_key);
         delete_tech=(Button)findViewById(R.id.tech_delete);
+        searchbt=(ImageButton)findViewById(R.id.search_tech);
+        insearcht=(EditText)findViewById(R.id.inputsearchtech);
 
         mprogreesdialog=new ProgressDialog(this);
 
@@ -85,7 +94,7 @@ private Button delete_tech;
         public void onClick(View v) {
             mprogreesdialog.setMessage("Posting to Path...");
             mprogreesdialog.show();
-            final String ttname=tname.getText().toString().trim();
+            final String ttname=tname.getText().toString().trim().toLowerCase();
             final String tposition=position.getText().toString().trim();
             final String tcontact=contact.getText().toString().trim();
             if(!TextUtils.isEmpty(ttname)&&!TextUtils.isEmpty(tposition)&&!TextUtils.isEmpty(tcontact))
@@ -136,8 +145,50 @@ private Button delete_tech;
         }
     });
 
-    }
+    searchbt.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String searchtext=insearcht.getText().toString().trim().toLowerCase();
+            searchteacherlist(searchtext);
+        }
+    });
 
+    }
+    private  void searchteacherlist(String searchtxt)
+    {
+        Toast.makeText(this, searchtxt, Toast.LENGTH_SHORT).show();
+        Query query=mdatabase.orderByChild("tech_name").startAt(searchtxt).endAt(searchtxt+"\uf8ff");
+       // Query query=mdatabase.orderByChild("tech_name").equalTo(searchtxt);
+        FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder>(
+                AddteacherListCSE.class,
+                R.layout.list_layout_teacher_cse,
+                TeachercseViewholder.class,
+                query)
+        {
+            @Override
+            protected void populateViewHolder(TeachercseViewholder viewHolder, AddteacherListCSE model, int position) {
+                final String tech_key=getRef(position).getKey();
+                //final String tech_key=getRef(position).toString(); //for showing the database reading
+
+
+                viewHolder.settechname(model.getTech_name());
+                viewHolder.settechposition(model.getTech_position());
+                viewHolder.settechcontact(model.getTech_contact());
+                viewHolder.settechimage(model.getTech_image());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(TeachersListCSE.this,tech_key,Toast.LENGTH_LONG).show();
+                        getkey.setText(tech_key.toString().trim());
+                    }
+                });
+
+            }
+        };
+
+        tech_cse_recycle.setAdapter(firebaseRecyclerAdapter);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -218,4 +269,6 @@ private Button delete_tech;
 
         }
     }
+
+
 }

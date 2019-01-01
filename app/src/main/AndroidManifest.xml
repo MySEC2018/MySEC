@@ -24,7 +24,7 @@
     <application
         android:name=".Offline_firebase"
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -88,10 +88,15 @@
         <activity
             android:name=".HolidaysNews"
             android:parentActivityName=".Home" />
+        <activity android:name=".Syllabus"
+            android:parentActivityName=".Home">
+
+        </activity>
         <activity
             android:name=".TeachersListCSE"
-            android:parentActivityName=".Home" />
-        <activity android:name=".Syllabus"></activity>
+            android:parentActivityName=".Home" >
+
+        </activity>
     </application>
 
 </manifest>
