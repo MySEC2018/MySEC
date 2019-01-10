@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Semester:"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/MySECcolor"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Credit:"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/MySECcolor"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total SGPA:"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/MySECcolor"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -97,12 +97,12 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="201dp"
-        android:background="#2d2121" />
+        android:background="@color/MySECcolor" />
 
     <LinearLayout
         android:layout_width="match_parent"
