@@ -74,7 +74,7 @@ public class Home extends AppCompatActivity {
         roundImage=(SelectableRoundedImageView) findViewById(R.id.userphoto);
         name=(EditText) findViewById(R.id.editname);
         setname=(TextView)findViewById (R.id.myname);
-        //forsharepreference
+        //forsharepreferencefore retrieving ingormation
         try{
             retrieve();
         }catch (Exception ex)
