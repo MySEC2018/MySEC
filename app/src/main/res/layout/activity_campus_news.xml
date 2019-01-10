@@ -6,17 +6,79 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CampusNews">
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp"
+        android:layout_margin="4dp"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="5dp"
+        android:id="@+id/cardvisiblesearch"
+        android:visibility="gone"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchlayout"
+            android:background="@color/MySECcolor"
+            >
+            <EditText
+                android:id="@+id/inputsearchtech"
+                android:layout_width="match_parent"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="3dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="50dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:background="@drawable/edittext_style_merged_focuseandnormal"
+                android:hint="title" />
+
+            <ImageButton
+                android:id="@+id/search_camp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                app:srcCompat="@drawable/search"
+                android:scaleType="center"
+                android:background="@color/MySECcolor"
+                tools:ignore="VectorDrawableCompat" />
+
+            <ImageButton
+                android:id="@+id/close_tech"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/MySECcolor"
+                android:scaleType="center"
+                app:srcCompat="@drawable/close"
+                tools:ignore="VectorDrawableCompat" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            card_view:cardCornerRadius="5dp"
+            android:id="@+id/cardvisibleadd"
+            android:visibility="gone"
+            >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/addinglayout"
-            android:visibility="gone"
             >
             <ImageButton
                 android:layout_width="wrap_content"
@@ -51,7 +113,7 @@
                 android:id="@+id/camp_date"
                 android:layout_margin="4dp"
                 android:background="@drawable/edittext_style_merged_focuseandnormal"
-                android:hint="contact"
+                android:hint="Date"
                 android:padding="5dp"
                 android:textColor="@color/MySECcolor"
                 />
@@ -62,6 +124,42 @@
                 android:text="submit"
                 android:id="@+id/camp_submit"
                 />
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:paddingRight="5dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_height="wrap_content"
+                card_view:contentPaddingRight="10dp"
+                card_view:contentPaddingLeft="10dp"
+                card_view:cardCornerRadius="4dp"
+                android:layout_gravity="end"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete a list"
+                    android:onClick="deleteactive"
+                    />
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp"
+            android:layout_margin="4dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5dp"
+            android:id="@+id/cardvisibledelete"
+            android:visibility="gone"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +173,27 @@
                 android:text="delete"
                 android:id="@+id/camp_delete"
                 />
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:paddingRight="5dp"
+                android:layout_marginBottom="4dp"
+                android:layout_height="wrap_content"
+                card_view:contentPaddingRight="10dp"
+                card_view:contentPaddingLeft="10dp"
+                card_view:cardCornerRadius="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_gravity="end"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add a list"
+                    android:onClick="Addactive"
+                    />
+            </android.support.v7.widget.CardView>
         </LinearLayout>
+        </android.support.v7.widget.CardView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

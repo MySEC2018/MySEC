@@ -1,10 +1,8 @@
 package com.example.admin.mysecazadshushil;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,8 +26,8 @@ import java.util.List;
 
 //import zoftino.com.firestore.R;
 
-public class Syllabus_recycler_adapter extends
-        RecyclerView.Adapter<Syllabus_recycler_adapter.ViewHolder> {
+public class Syllabus_recycler_adapter_admin extends
+        RecyclerView.Adapter<Syllabus_recycler_adapter_admin.ViewHolder> {
 
     private List<String> fileList;
     private Context context;
@@ -41,7 +39,7 @@ public class Syllabus_recycler_adapter extends
     private String DOWNLOAD_DIR = Environment.getExternalStoragePublicDirectory
             (Environment.DIRECTORY_DOWNLOADS).getPath();
 
-    public Syllabus_recycler_adapter(List<String> list, Context ctx, String uid) {
+    public Syllabus_recycler_adapter_admin(List<String> list, Context ctx, String uid) {
         fileList = list;
         context = ctx;
         //userId = uid;
@@ -53,22 +51,22 @@ public class Syllabus_recycler_adapter extends
     }
 
     @Override
-    public Syllabus_recycler_adapter.ViewHolder
+    public Syllabus_recycler_adapter_admin.ViewHolder
     onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_layout_syllabus, parent, false);
+                .inflate(R.layout.list_layout_syllabus_admin, parent, false);
 
         firebaseStorage = FirebaseStorage.getInstance();
         firestoreDB = FirebaseFirestore.getInstance();
 
-        Syllabus_recycler_adapter.ViewHolder viewHolder =
-                new Syllabus_recycler_adapter.ViewHolder(view);
+        Syllabus_recycler_adapter_admin.ViewHolder viewHolder =
+                new Syllabus_recycler_adapter_admin.ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(Syllabus_recycler_adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(Syllabus_recycler_adapter_admin.ViewHolder holder, int position) {
         final int itemPos = position;
         final String fileName = fileList.get(position);
         holder.name.setText(fileName);

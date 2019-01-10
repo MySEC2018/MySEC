@@ -11,11 +11,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,6 +37,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -43,8 +50,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CampusNews extends AppCompatActivity {
-    private ImageButton addimage;
-    private EditText ttitle, position, contact;
+    ImageButton addimage,searchbt, closebt;
+    private EditText ttitle, position, contact,insearcht;
     private Button sub;
     private Uri imageUri;
     private StorageReference mstorage;
@@ -54,8 +61,11 @@ public class CampusNews extends AppCompatActivity {
     private RecyclerView camp_recycle;
     private EditText getkey;
     private Button delete_tech;
-    private LinearLayout addingvisibility;
     ArrayList<AddCampusNews> campfire;
+
+    private CardView addingvisibility, deletevisibility;
+    private CardView cardViewvisible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +81,13 @@ public class CampusNews extends AppCompatActivity {
         sub=(Button)findViewById(R.id.camp_submit);
         getkey=(EditText)findViewById(R.id.camp_key);
         delete_tech=(Button)findViewById(R.id.camp_delete);
-
-        addingvisibility=(LinearLayout)findViewById(R.id.addinglayout);
+        insearcht=(EditText)findViewById(R.id.inputsearchtech);
+        searchbt=(ImageButton)findViewById(R.id.search_camp);
+        closebt=(ImageButton)findViewById(R.id.close_tech);
+        cardViewvisible=(CardView)findViewById(R.id.cardvisiblesearch);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        addingvisibility=(CardView) findViewById(R.id.cardvisibleadd);
+        deletevisibility=(CardView) findViewById(R.id.cardvisibledelete);
         try {
             Bundle bun = getIntent().getExtras();
             String val = bun.getString("login");
@@ -88,6 +103,14 @@ public class CampusNews extends AppCompatActivity {
         camp_recycle.setHasFixedSize(true);
         camp_recycle.setLayoutManager(new LinearLayoutManager(this));
 
+        closebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardViewvisible.setVisibility(View.GONE);
+                Animation anim= AnimationUtils.loadAnimation(CampusNews.this, R.anim.searchclose);
+                cardViewvisible.startAnimation(anim);
+            }
+        });
         addimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +125,7 @@ public class CampusNews extends AppCompatActivity {
             public void onClick(View v) {
                 mprogreesdialog.setMessage("Posting to Path...");
                 mprogreesdialog.show();
-                final String tttitle=ttitle.getText().toString().trim();
+                final String tttitle=ttitle.getText().toString().trim().toLowerCase();
                 final String tposition=position.getText().toString().trim();
                 final String tcontact=contact.getText().toString().trim();
                 if(!TextUtils.isEmpty(tttitle)&&!TextUtils.isEmpty(tposition)&&!TextUtils.isEmpty(tcontact))
@@ -152,9 +175,52 @@ public class CampusNews extends AppCompatActivity {
                 mdatabase.removeValue();
             }
         });
+        searchbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchtext=insearcht.getText().toString().trim().toLowerCase();
+                searchteacherlist(searchtext);
+            }
+        });
 
     }
 
+    private  void searchteacherlist(String searchtxt)
+    {
+        Toast.makeText(this, "Searching: "+searchtxt, Toast.LENGTH_SHORT).show();
+        Query query_campus=mdatabase.orderByChild("camp_tittle").startAt(searchtxt).endAt(searchtxt+"\uf8ff");
+        // Query query=mdatabase.orderByChild("tech_name").equalTo(searchtxt);
+        final FirebaseRecyclerAdapter<AddCampusNews, CampNewsViewholder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<AddCampusNews, CampNewsViewholder>( AddCampusNews.class,
+                R.layout.list_layout,
+                CampNewsViewholder.class,
+                query_campus)
+        {
+            @Override
+            protected void populateViewHolder(CampNewsViewholder viewHolder, AddCampusNews model, int position) {
+                final String camp_key=getRef(position).getKey();
+                //final String camp_key=getRef(position).toString(); //for showing the database reading
+                viewHolder.setTitle(model.getCamp_tittle());
+                viewHolder.setDescription(model.getCamp_descrip());
+                viewHolder.setDate(model.getCamp_date());
+                viewHolder.setImage(model.getCamp_image());
+                /*String t=model.getCampus_date();
+                String d=model.getCampus_descrip();
+                String dd=model.getCampus_date();
+                String i=model.getCampus_img();
+                AddCampusNews camp=new AddCampusNews(d, dd, i, t);
+                campfire.add(camp);*/
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(CampusNews.this,camp_key,Toast.LENGTH_LONG).show();
+                        getkey.setText(camp_key.toString().trim());
+                    }
+                });
+
+            }
+        };
+        camp_recycle.setAdapter(firebaseRecyclerAdapter);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -199,6 +265,17 @@ public class CampusNews extends AppCompatActivity {
         };
         camp_recycle.setAdapter(firebaseRecyclerAdapter);
     }
+
+    public void deleteactive(View view) {
+        deletevisibility.setVisibility(View.VISIBLE);
+        addingvisibility.setVisibility(View.GONE);
+    }
+
+    public void Addactive(View view) {
+        deletevisibility.setVisibility(View.GONE);
+        addingvisibility.setVisibility(View.VISIBLE);
+    }
+
     public static class CampNewsViewholder extends RecyclerView.ViewHolder{
         View mView;
         public CampNewsViewholder(View itemView)
@@ -236,5 +313,25 @@ public class CampusNews extends AppCompatActivity {
 
 
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.teacher_search_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case R.id.tech_search:
+                cardViewvisible.setVisibility(View.VISIBLE);
+                Animation anim= AnimationUtils.loadAnimation(this, R.anim.searchopen);
+                cardViewvisible.startAnimation(anim);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

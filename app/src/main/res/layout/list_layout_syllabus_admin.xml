@@ -39,12 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:paddingRight="5dp"
-        android:layout_marginRight="10dp"
         card_view:cardCornerRadius="4dp"
-        card_view:contentPaddingLeft="10dp"
-        card_view:contentPaddingRight="10dp"
-        card_view:cardBackgroundColor="@color/MySECcolor">
-
+        card_view:cardBackgroundColor="@color/MySECcolor"
+        >
         <Button
             android:id="@+id/download_file_b"
             android:layout_width="wrap_content"
@@ -58,7 +55,9 @@
             android:textColor="#fff"
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="Download" />
+            android:text="Download"
+            android:visibility="gone"
+            />
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
@@ -88,7 +87,7 @@
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:text="Delete"
-            android:visibility="gone"
+            android:visibility="visible"
             />
     </android.support.v7.widget.CardView>
     </LinearLayout>

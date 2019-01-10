@@ -51,6 +51,7 @@ public class Home extends AppCompatActivity {
     static Button loginbutton;
     String email, pass;
     TextView success, fail;
+    LinearLayout loginp, adminp,techcsesection,campsection, sylopen;
 
 
     private DrawerLayout myDrawer;
@@ -252,6 +253,11 @@ public void AzadIntentAnimation()
         loginbutton=(Button)logindia.findViewById(R.id.login_login);
         success=(TextView)logindia.findViewById(R.id.success);
         fail=(TextView)logindia.findViewById(R.id.fail);
+        loginp=(LinearLayout)logindia.findViewById(R.id.loginpanel);
+        adminp=(LinearLayout)logindia.findViewById(R.id.adminpanel);
+        techcsesection=(LinearLayout) logindia.findViewById(R.id.techcseopen);
+        campsection=(LinearLayout) logindia.findViewById(R.id.campopen);
+        sylopen=(LinearLayout) logindia.findViewById(R.id.syllabusopen);
         final String email="ali", pass="123";
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,12 +267,46 @@ public void AzadIntentAnimation()
                 {
                     success.setVisibility(View.VISIBLE);
                     fail.setVisibility(View.GONE);
-                    Bundle bundle=new Bundle();
-                    bundle.putString("login", "1");
-                    //try{campusNews.visible();}catch (Exception ex){}
-                    Intent nextintent=new Intent(Home.this, CampusNews.class);
-                    nextintent.putExtras(bundle);
-                    startActivity(nextintent);
+                    loginp.setVisibility(View.GONE);
+                    adminp.setVisibility(View.VISIBLE);
+
+
+
+                    techcsesection.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle bundle=new Bundle();
+                            bundle.putString("login", "1");
+                            //try{campusNews.visible();}catch (Exception ex){}
+                            Intent nextintent=new Intent(Home.this, TeachersListCSE.class);
+                            nextintent.putExtras(bundle);
+                            startActivity(nextintent);
+                        }
+                    });
+                    campsection.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle bundle=new Bundle();
+                            bundle.putString("login", "1");
+                            //try{campusNews.visible();}catch (Exception ex){}
+                            Intent nextintent=new Intent(Home.this, CampusNews.class);
+                            nextintent.putExtras(bundle);
+                            startActivity(nextintent);
+                        }
+                    });
+                    sylopen.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle bundle=new Bundle();
+                            bundle.putString("login", "1");
+                            //try{campusNews.visible();}catch (Exception ex){}
+                            Intent nextintent=new Intent(Home.this, Syllabus.class);
+                            nextintent.putExtras(bundle);
+                            startActivity(nextintent);
+                        }
+                    });
+
+
                 }
                 else {
                     fail.setVisibility((View.VISIBLE));

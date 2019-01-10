@@ -1,5 +1,6 @@
 package com.example.admin.mysecazadshushil;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -18,11 +20,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,14 +46,18 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
+import maes.tech.intentanim.CustomIntent;
+
 public class TeachersListCSE extends AppCompatActivity {
-ImageButton addimage,searchbt;
-EditText tname, position, contact, insearcht;
-Button sub;
+private ImageButton addimage,searchbt, closebt;
+private EditText tname, position, contact, insearcht;
+private Button sub;
+private CardView addingvisibility, deletevisibility;
 private Uri imageUri;
 private StorageReference mstorage;
 private DatabaseReference mdatabase;
@@ -56,6 +66,7 @@ private ProgressDialog mprogreesdialog;
 private RecyclerView tech_cse_recycle;
 private EditText getkey;
 private Button delete_tech;
+private CardView cardViewvisible;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +83,20 @@ private Button delete_tech;
         getkey=(EditText)findViewById(R.id.tech_key);
         delete_tech=(Button)findViewById(R.id.tech_delete);
         searchbt=(ImageButton)findViewById(R.id.search_tech);
+        closebt=(ImageButton)findViewById(R.id.close_tech);
         insearcht=(EditText)findViewById(R.id.inputsearchtech);
+        cardViewvisible=(CardView)findViewById(R.id.cardvisiblesearch);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        addingvisibility=(CardView) findViewById(R.id.cardvisibleadd);
+        deletevisibility=(CardView) findViewById(R.id.cardvisibledelete);
+        try {
+            Bundle bun = getIntent().getExtras();
+            String val = bun.getString("login");
+            String key = "1";
+            if (val.equals(key)) {
+                addingvisibility.setVisibility(View.VISIBLE);
+            }
+        }catch (Exception ex){}
 
         mprogreesdialog=new ProgressDialog(this);
 
@@ -80,6 +104,14 @@ private Button delete_tech;
         tech_cse_recycle.setHasFixedSize(true);
         tech_cse_recycle.setLayoutManager(new LinearLayoutManager(this));
 
+        closebt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardViewvisible.setVisibility(View.GONE);
+                Animation anim= AnimationUtils.loadAnimation(TeachersListCSE.this, R.anim.searchclose);
+                cardViewvisible.startAnimation(anim);
+            }
+        });
         addimage.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -156,7 +188,7 @@ private Button delete_tech;
     }
     private  void searchteacherlist(String searchtxt)
     {
-        Toast.makeText(this, searchtxt, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Searching: "+searchtxt, Toast.LENGTH_SHORT).show();
         Query query=mdatabase.orderByChild("tech_name").startAt(searchtxt).endAt(searchtxt+"\uf8ff");
        // Query query=mdatabase.orderByChild("tech_name").equalTo(searchtxt);
         FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder>(
@@ -231,6 +263,17 @@ private Button delete_tech;
         tech_cse_recycle.setAdapter(firebaseRecyclerAdapter);
 
     }
+
+    public void deleteactive(View view) {
+        deletevisibility.setVisibility(View.VISIBLE);
+        addingvisibility.setVisibility(View.GONE);
+    }
+
+    public void Addactive(View view) {
+        deletevisibility.setVisibility(View.GONE);
+        addingvisibility.setVisibility(View.VISIBLE);
+    }
+
     public static class TeachercseViewholder extends RecyclerView.ViewHolder{
         View mView;
         public TeachercseViewholder(View itemView)
@@ -269,6 +312,24 @@ private Button delete_tech;
 
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.teacher_search_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        switch (item.getItemId())
+        {
+            case R.id.tech_search:
+                cardViewvisible.setVisibility(View.VISIBLE);
+                Animation anim= AnimationUtils.loadAnimation(this, R.anim.searchopen);
+                cardViewvisible.startAnimation(anim);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
