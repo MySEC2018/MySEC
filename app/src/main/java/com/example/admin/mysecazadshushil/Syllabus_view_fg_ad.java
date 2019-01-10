@@ -24,9 +24,9 @@ import java.util.List;
 
 //import zoftino.com.firestore.R;
 
-public class Syllabus_viewfil_frag extends Fragment {
+public class Syllabus_view_fg_ad extends Fragment {
 
-    private static final String TAG = "Syllabus_viewfil_frag";
+    private static final String TAG = "Syllabus_view_fg_ad";
 
     private FirebaseFirestore firestoreDB;
     private String userId;
@@ -41,7 +41,7 @@ public class Syllabus_viewfil_frag extends Fragment {
 
         //userId = getArguments().getString("userId");
 
-        View view = inflater.inflate(R.layout.fragment_syllabus_view_files_fragment,
+        View view = inflater.inflate(R.layout.fragment_syllabus_view_files_fragment_admin,
                 container, false);
         deletelsyl=view.findViewById(R.id.delete_file_b);
         firestoreDB = FirebaseFirestore.getInstance();
@@ -84,8 +84,8 @@ public class Syllabus_viewfil_frag extends Fragment {
                             for(DocumentSnapshot doc : task.getResult()){
                                 fileList.add(doc.getString("storagePath"));
                             }
-                            Syllabus_recycler_adapter recyclerViewAdapter = new
-                                    Syllabus_recycler_adapter(fileList,
+                            Syllabus_recycler_adapter_admin recyclerViewAdapter = new
+                                    Syllabus_recycler_adapter_admin(fileList,
                                     getActivity(), userId);
                             filesRecyclerView.setAdapter(recyclerViewAdapter);
 

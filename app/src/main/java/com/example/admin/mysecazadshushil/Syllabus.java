@@ -9,12 +9,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,8 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 //import zoftino.com.firestore.R;
 
 public class Syllabus extends AppCompatActivity {
-
+    private CardView addingvisibility, admindelvisible;
     //private FirebaseUser user;
+    Button deletesyl;
     private static final String TAG = "Syllabus";
     private FragmentManager fm;
 
@@ -34,7 +37,18 @@ public class Syllabus extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syllabus);
-
+        getSupportActionBar().setTitle("Files");
+        addingvisibility=(CardView) findViewById(R.id.syllabusvisiblein);
+        admindelvisible=(CardView) findViewById(R.id.syllabusvisibledel);
+        try {
+            Bundle bun = getIntent().getExtras();
+            String val = bun.getString("login");
+            String key = "1";
+            if (val.equals(key)) {
+                addingvisibility.setVisibility(View.VISIBLE);
+                admindelvisible.setVisibility(View.VISIBLE);
+            }
+        }catch (Exception ex){}
         /*user = FirebaseAuth.getInstance().getCurrentUser();
         if(user == null){
             //if user is not authenticated show authentication screen
