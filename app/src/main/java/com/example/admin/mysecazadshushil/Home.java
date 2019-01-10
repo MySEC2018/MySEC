@@ -400,4 +400,9 @@ public void AzadIntentAnimation()
         Intent intent=new Intent(Home.this, MyProfile.class);
         startActivity(intent);
     }
+
+    public void opencgpacal(View view) {
+        Intent intent=new Intent(this,CGPA_calculator.class);
+        startActivity(intent);
+    }
 }
