@@ -30,7 +30,7 @@ public class AlertDialogFragment extends DialogFragment {
 
         textViewTotalCgpa.setText(String.format("%.2f", getArguments().getDouble("totalCgpa")));
         textViewTotalSemester.setText(Integer.toString(getArguments().getInt("totalSemester")));
-        textViewTotalSgpa.setText(Double.toString(getArguments().getDouble("totalSgpa")));
+        textViewTotalSgpa.setText(String.format("%.2f",getArguments().getDouble("totalSgpa")));
         textViewTotalCredit.setText(String.format("%.2f",getArguments().getDouble("totalCredit")));
 
         buttonOk = view.findViewById(R.id.buttonOk);
