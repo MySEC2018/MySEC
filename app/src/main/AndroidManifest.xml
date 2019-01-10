@@ -95,8 +95,9 @@
         <activity
             android:name=".TeachersListCSE"
             android:parentActivityName=".Home" >
-
         </activity>
+        <activity android:name=".CGPA_calculator"
+            android:parentActivityName=".Home"></activity>
     </application>
 
 </manifest>

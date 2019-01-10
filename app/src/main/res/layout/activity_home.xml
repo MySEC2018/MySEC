@@ -36,30 +36,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     card_view:cardCornerRadius="4dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/gallery"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:textColor="@color/MySECcolor"
-                        android:layout_height="wrap_content"
-                        android:text="SEC Gallery"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:paddingRight="4dp"
-                        android:paddingLeft="4dp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        />
-                </LinearLayout>
+                        android:orientation="horizontal"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/gallery"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/MySECcolor"
+                            android:layout_height="wrap_content"
+                            android:text="SEC Gallery"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:paddingRight="4dp"
+                            android:paddingLeft="4dp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            />
+                    </LinearLayout>
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -70,11 +70,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     card_view:cardCornerRadius="4dp">
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="190dp"
-                    android:layout_alignParentTop="true" />
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        android:layout_alignParentTop="true" />
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -84,13 +84,13 @@
                     android:layout_height="wrap_content"
                     android:background="@color/MySECcolor"
                     card_view:cardCornerRadius="4dp">
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    app:ci_drawable="@drawable/circleindicator"
-                    app:ci_drawable_unselected="@drawable/circleindicatoruncheck"
-                    android:layout_alignParentBottom="true"/>
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        app:ci_drawable="@drawable/circleindicator"
+                        app:ci_drawable_unselected="@drawable/circleindicatoruncheck"
+                        android:layout_alignParentBottom="true"/>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
             <LinearLayout
@@ -110,29 +110,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     card_view:cardCornerRadius="4dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/welcome"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Welcome to Sylhet Engineering College"
-                        android:textColor="@color/MySECcolor"
-                        android:textSize="15dp"
-                        android:paddingBottom="4dp"
-                        android:layout_gravity="center"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        />
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/welcome"
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Welcome to Sylhet Engineering College"
+                            android:textColor="@color/MySECcolor"
+                            android:textSize="15dp"
+                            android:paddingBottom="4dp"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            />
+
+                    </LinearLayout>
                 </android.support.v7.widget.CardView>
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -142,94 +142,177 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     card_view:cardCornerRadius="4dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/l1"
-                    android:elevation="5dp"
-                    >
-                    <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:text="@string/mysecdescrip"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginLeft="4dp"
-                    />
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:text="@string/mysecdescrip2"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    />
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
-                    android:textColor="#000"
-                    android:text="@string/mysecdescrip3"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    />
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:textSize="18dp"
-                    android:text="@string/mysecdescrip4"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    />
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:textSize="18dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:text="@string/mysecdescrip5"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    />
-                    <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:text="@string/mysecdescrip6"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="5dp"
-                    />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/l1"
+                        android:elevation="5dp"
+                        >
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:text="@string/mysecdescrip"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:text="@string/mysecdescrip2"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18dp"
+                            android:textColor="#000"
+                            android:text="@string/mysecdescrip3"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:text="@string/mysecdescrip4"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:textSize="18dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:text="@string/mysecdescrip5"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            />
+                        <TextView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:text="@string/mysecdescrip6"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginBottom="5dp"
+                            />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
-            <Button
-                android:id="@+id/login"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="login"
-                android:onClick="loginDialog"
-                />
+                android:orientation="vertical"
+                >
+                <Button
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="login"
+                    android:onClick="loginDialog"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <android.support.v7.widget.CardView
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="20dp"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/cgpacal"
+                            android:onClick="opencgpacal"
+
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                >
+                                <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:src="@drawable/camp_new"
+                                    android:scaleType="fitXY"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:text="CGPA calculator"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.CardView
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_margin="20dp"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/schedule"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                >
+
+                                <ImageView
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:src="@drawable/tech_list"
+                                    android:scaleType="fitXY" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Schedule"
+                                    android:textColor="#000"
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
