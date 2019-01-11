@@ -61,11 +61,13 @@ public class Home extends AppCompatActivity {
     private static int currentPage = 0;
     private static final Integer[] XMEN= {R.drawable.two,R.drawable.three, R.drawable.one, R.drawable.four, R.drawable.five};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
+    private static Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().setTitle("Welcome");
+        Home.context = getApplicationContext();
         init();
 
         ///header layout part
@@ -172,6 +174,14 @@ public class Home extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+    public static Context getAppContext() {
+        return Home.context;
+    }
+
+    public static int getPx(Context context, int dimensionDp) {
+        float density = context.getResources().getDisplayMetrics().density;
+        return (int) (dimensionDp * density + 0.5f);
     }
 public void AzadIntentAnimation()
 {
@@ -404,5 +414,12 @@ public void AzadIntentAnimation()
     public void opencgpacal(View view) {
         Intent intent=new Intent(this,CGPA_calculator.class);
         startActivity(intent);
+        AzadIntentAnimation();
+    }
+
+    public void openschedule(View view) {
+        Intent intent=new Intent(this,SchedulerActivity.class);
+        startActivity(intent);
+        AzadIntentAnimation();
     }
 }
