@@ -98,6 +98,17 @@
         </activity>
         <activity android:name=".CGPA_calculator"
             android:parentActivityName=".Home"></activity>
+        <activity
+            android:name=".SchedulerActivity"
+            android:parentActivityName=".Home"
+            />
+        <activity
+            android:name=".NewScheduleActivity"
+            android:parentActivityName=".SchedulerActivity"
+             />
+        <activity android:name=".ScheduleUpdateActivity"
+            android:parentActivityName=".SchedulerActivity"
+            />
     </application>
 
 </manifest>
