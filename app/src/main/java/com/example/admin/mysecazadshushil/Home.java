@@ -51,7 +51,7 @@ public class Home extends AppCompatActivity {
     static Button loginbutton;
     String email, pass;
     TextView success, fail;
-    LinearLayout loginp, adminp,techcsesection,campsection, sylopen;
+    LinearLayout loginp, adminp,techcsesection,campsection, sylopen, Holiopen;
 
 
     private DrawerLayout myDrawer;
@@ -156,6 +156,12 @@ public class Home extends AppCompatActivity {
                         if(menuItem.getItemId()==R.id.teacherslist)
                         {
                             Intent homeintent=new Intent(Home.this, TeachersListCSE.class);
+                            startActivity(homeintent);
+                            AzadIntentAnimation();
+                        }
+                        if(menuItem.getItemId()==R.id.holidays)
+                        {
+                            Intent homeintent=new Intent(Home.this, HolidaysNews.class);
                             startActivity(homeintent);
                             AzadIntentAnimation();
                         }
@@ -268,6 +274,7 @@ public void AzadIntentAnimation()
         techcsesection=(LinearLayout) logindia.findViewById(R.id.techcseopen);
         campsection=(LinearLayout) logindia.findViewById(R.id.campopen);
         sylopen=(LinearLayout) logindia.findViewById(R.id.syllabusopen);
+        Holiopen=(LinearLayout)logindia.findViewById(R.id.holidaysopen);
         final String email="ali", pass="123";
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -311,6 +318,17 @@ public void AzadIntentAnimation()
                             bundle.putString("login", "1");
                             //try{campusNews.visible();}catch (Exception ex){}
                             Intent nextintent=new Intent(Home.this, Syllabus.class);
+                            nextintent.putExtras(bundle);
+                            startActivity(nextintent);
+                        }
+                    });
+                    Holiopen.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle bundle=new Bundle();
+                            bundle.putString("login", "1");
+                            //try{campusNews.visible();}catch (Exception ex){}
+                            Intent nextintent=new Intent(Home.this, HolidaysNews.class);
                             nextintent.putExtras(bundle);
                             startActivity(nextintent);
                         }

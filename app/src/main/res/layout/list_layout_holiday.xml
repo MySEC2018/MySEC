@@ -100,14 +100,14 @@
                 android:textSize="17dp"
                 android:textColor="#000"
                 android:layout_marginBottom="5dp"
-                android:text="10 days"
+                android:text="27 feb - 17 mar"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/holidays_dur_day"
                 android:gravity="end"
-                android:text="27 feb - 17 mar"
+                android:text="20 days"
                 />
         </LinearLayout>
     </android.support.v7.widget.CardView>
