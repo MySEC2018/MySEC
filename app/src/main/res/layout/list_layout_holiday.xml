@@ -35,6 +35,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_weight="4"
                     android:id="@+id/holidays_date"
+                    android:text="29"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -46,6 +47,7 @@
                     android:textColor="@color/MySECcolor"
                     android:textStyle="bold"
                     android:id="@+id/holidays_month"
+                    android:text="Feb"
                     />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -73,6 +75,7 @@
             android:textStyle="bold"
             android:textColor="@color/Button"
             android:textAllCaps="true"
+            android:text="Eid Vacation"
             />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
@@ -97,13 +100,14 @@
                 android:textSize="17dp"
                 android:textColor="#000"
                 android:layout_marginBottom="5dp"
-
+                android:text="10 days"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/holidays_dur_day"
                 android:gravity="end"
+                android:text="27 feb - 17 mar"
                 />
         </LinearLayout>
     </android.support.v7.widget.CardView>
