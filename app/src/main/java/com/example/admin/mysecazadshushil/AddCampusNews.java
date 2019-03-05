@@ -1,7 +1,7 @@
 package com.example.admin.mysecazadshushil;
 
 public class AddCampusNews {
-   public String camp_tittle;
+    public String camp_tittle;
     public String camp_descrip;
     public String camp_date;
     public String camp_image;

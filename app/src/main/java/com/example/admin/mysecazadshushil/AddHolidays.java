@@ -1,60 +1,53 @@
 package com.example.admin.mysecazadshushil;
 
 public class AddHolidays {
-    String holidays_date;
-    String holidays_month;
-    String holidyas_tittle;
-    String holidyas_dur_text;
-    String holidyas_dur_day;
+    public String h_month;
+    public String h_date;
+    public String h_tittle;
+    public String  h_dur_day;
+    public String h_dur_text;
     public AddHolidays()
     {
 
     }
-    public AddHolidays(String holidays_date, String holidays_month, String holidyas_tittle, String holidyas_dur_text, String holidyas_dur_day)
-    {
-        this.holidays_date=holidays_date;
-        this.holidays_month=holidays_month;
-        this.holidyas_tittle=holidyas_tittle;
-        this.holidyas_dur_text=holidyas_dur_text;
-        this.holidyas_dur_day=holidyas_dur_day;
-    }
-    public String getHolidays_date() {
-        return holidays_date;
+    public String getH_month() {
+        return h_month;
     }
 
-    public void setHolidays_date(String holidays_date) {
-        this.holidays_date = holidays_date;
+    public void setH_month(String h_month) {
+        this.h_month = h_month;
     }
 
-    public String getHolidays_month() {
-        return holidays_month;
+    public String getH_date() {
+        return h_date;
     }
 
-    public void setHolidays_month(String holidays_month) {
-        this.holidays_month = holidays_month;
+    public void setH_date(String h_date) {
+        this.h_date = h_date;
     }
 
-    public String getHolidyas_tittle() {
-        return holidyas_tittle;
+    public String getH_tittle() {
+        return h_tittle;
     }
 
-    public void setHolidyas_tittle(String holidyas_tittle) {
-        this.holidyas_tittle = holidyas_tittle;
+    public void setH_tittle(String h_tittle) {
+        this.h_tittle = h_tittle;
     }
 
-    public String getHolidyas_dur_text() {
-        return holidyas_dur_text;
+    public String getH_dur_day() {
+        return h_dur_day;
     }
 
-    public void setHolidyas_dur_text(String holidyas_dur_text) {
-        this.holidyas_dur_text = holidyas_dur_text;
+    public void setH_dur_day(String h_dur_day) {
+        this.h_dur_day = h_dur_day;
     }
 
-    public String getHolidyas_dur_day() {
-        return holidyas_dur_day;
+    public String getH_dur_text() {
+        return h_dur_text;
     }
 
-    public void setHolidyas_dur_day(String holidyas_dur_day) {
-        this.holidyas_dur_day = holidyas_dur_day;
+    public void setH_dur_text(String h_dur_text) {
+        this.h_dur_text = h_dur_text;
     }
 }
+//setter/getter field name should exactly same with database field name
