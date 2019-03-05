@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="20dp"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardCornerRadius="10dp"
     >
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="5dp">
     <TextView
         android:id="@+id/textTotal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/MySECcolor"
+        android:layout_height="30dp"
+        android:background="#fff"
         android:gravity="center_horizontal"
         android:text="Total CGPA"
-        android:textColor="#FFF"
-        android:textSize="30sp"
+        android:textColor="@color/MySECcolor"
+        android:textSize="20sp"
         android:textStyle="bold" />
+        </android.support.v7.widget.CardView>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
         <TextView
             android:id="@+id/textViewSemester"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Semester:"
             android:textColor="@color/MySECcolor"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+             />
 
         <TextView
             android:id="@+id/textViewTotalSemester"
@@ -35,20 +52,22 @@
             android:layout_marginLeft="30dp"
             android:text="2"
             android:textColor="#000"
-            android:textSize="25sp"
+            android:textSize="23sp"
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        >
     <TextView
             android:id="@+id/textViewCredit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Credit:"
             android:textColor="@color/MySECcolor"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/textViewTotalCredit"
@@ -58,20 +77,21 @@
             android:layout_marginLeft="30dp"
             android:text="30.00"
             android:textColor="#000"
-            android:textSize="25sp"
+            android:textSize="23sp"
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
         <TextView
             android:id="@+id/textViewSgpa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total SGPA:"
             android:textColor="@color/MySECcolor"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/textViewTotalSgpa"
@@ -81,7 +101,7 @@
             android:layout_marginLeft="30dp"
             android:text="7.00"
             android:textColor="#000"
-            android:textSize="24sp"
+            android:textSize="23sp"
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
@@ -90,18 +110,20 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:background="#2d2121" />
+        android:background="#2d2121"
+        android:layout_margin="5dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
     <TextView
             android:id="@+id/textViewCgpa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CGPA:"
             android:textColor="@color/MySECcolor"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
@@ -119,6 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingBottom="10dp"
         >
         <Button
             android:id="@+id/buttonOk"
@@ -129,5 +152,5 @@
             android:text="Ok"
             />
     </LinearLayout>
-
-</LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

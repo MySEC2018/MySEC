@@ -1,5 +1,9 @@
 package com.example.admin.mysecazadshushil;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +19,7 @@ public class CGPA_calculator extends AppCompatActivity {
 
     private Button newSemesterButton;
     private Button calculateCgpaButton;
+    private Dialog mydialog;
     private LinearLayout linearLayoutOne, linearLayoutSingleTwo, linearLayoutSingleThree, linearLayoutSingleFour,
             linearLayoutSingleFive, linearLayoutSingleSix, linearLayoutSingleSeven, linearLayoutSingleEight,
             linearLayoutSingleNine, linearLayoutSingleTen, linearLayoutSingleEleven, linearLayoutSingleTwelve, linearLayoutSingleThirteen;
@@ -33,9 +38,15 @@ public class CGPA_calculator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cgpa_calculator);
+        getSupportActionBar().setTitle("CGPA calculator");
 
+        mydialog=new Dialog(this);
         init();
-
+        for(int i=0; i<credits.length; i++)
+        {
+            credits[i]=0;
+            sgpas[i]=0;
+        }
         layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         newSemesterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,16 +54,29 @@ public class CGPA_calculator extends AppCompatActivity {
                 newButtonClicked();
             }
         });
-
         calculateCgpaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calculateCgpa();
+                if(((j==1 &&(creditOne.getText().toString().trim().isEmpty() || sgpaOne.getText().toString().trim().isEmpty() )))
+                        || ((j==2 && (creditTwo.getText().toString().trim().isEmpty() || sgpaTwo.getText().toString().trim().isEmpty() )))
+                        || ((j==3 && (creditThree.getText().toString().trim().isEmpty() || sgpaThree.getText().toString().trim().isEmpty() )))
+                        || ((j==4 && (creditFour.getText().toString().trim().isEmpty() || sgpaFour.getText().toString().trim().isEmpty() )))
+                        || ((j==5 && (creditFive.getText().toString().trim().isEmpty() || sgpaFive.getText().toString().trim().isEmpty() )))
+                        || ((j==6 && (creditSix.getText().toString().trim().isEmpty() || sgpaSix.getText().toString().trim().isEmpty() )))
+                        || ((j==7 && (creditSeven.getText().toString().trim().isEmpty() || sgpaSeven.getText().toString().trim().isEmpty() )))
+                        || ((j==8 && (creditEight.getText().toString().trim().isEmpty() || sgpaEight.getText().toString().trim().isEmpty() )))
+                        )
+                {
+                    Toast.makeText(CGPA_calculator.this, "Fields empty error", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    calculateCgpa();
+                }
             }
         });
     }
-
-    private void calculateCgpa() {
+    private void addingsection()
+    {
         if (j == 1) {
             credits[0] = Double.parseDouble(creditOne.getText().toString());
             sgpas[0] = Double.parseDouble(sgpaOne.getText().toString());
@@ -153,13 +177,19 @@ public class CGPA_calculator extends AppCompatActivity {
             credits[8] = Double.parseDouble(creditNine.getText().toString());
             sgpas[8] = Double.parseDouble(sgpaNine.getText().toString());
         }
-
+    }
+    private void calculateCgpa() {
+        addingsection();
         double totalCredit = 0.0;
         double finalCgpa = 0.0;
         double temp = 0.0;
         double totalSgpa = 0.0;
         int totalSemester = 0;
 
+       /* if(j==1 && creditOne.getText().toString().trim().isEmpty() && sgpaOne.getText().toString().trim().isEmpty())
+        {
+            Toast.makeText(this, "Fields empty error", Toast.LENGTH_SHORT).show();
+        }*/
         for (int k = 0; k < credits.length; k++) {
             if(credits[k] != 0.0 && sgpas[k] != 0.0){
                 temp += (double) (credits[k] * sgpas[k]);
@@ -170,6 +200,11 @@ public class CGPA_calculator extends AppCompatActivity {
         }
         finalCgpa = (temp / totalCredit);
 
+        //mydialog.setContentView(R.layout.layout_custom_dialog_cgpa);
+        //mydialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //mydialog.show();
+
+
         AlertDialogFragment dialogFragment = new AlertDialogFragment();
         Bundle args = new Bundle();
         args.putDouble("totalSgpa", totalSgpa);
@@ -178,6 +213,8 @@ public class CGPA_calculator extends AppCompatActivity {
         args.putInt("totalSemester", totalSemester);
         dialogFragment.setArguments(args);
         dialogFragment.show(getSupportFragmentManager(), "dialog");
+        //dialogFragment.getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
        // Toast.makeText(this, String.valueOf(finalCgpa), Toast.LENGTH_SHORT).show();
     }

@@ -12,12 +12,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.admin.mysecazadshushil.Adapters.ScheduleRecyclerViewAdapter;
 import com.example.admin.mysecazadshushil.Models.Schedule_model;
 import com.example.admin.mysecazadshushil.MyDBHelper.ScheduleDbHelper;
 
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -26,6 +31,7 @@ public class SchedulerActivity extends AppCompatActivity {
     FloatingActionButton fab;
     List<Schedule_model> schedules;
     ScheduleDbHelper scheduleDbHelper;
+    TextView day, time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,8 @@ public class SchedulerActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Schedule");
         scheduleDbHelper = new ScheduleDbHelper(this);
         schedules = scheduleDbHelper.getAll();
-
+        day=(TextView)findViewById(R.id.dayTextView);
+        time=(TextView)findViewById(R.id.timeTextView);
         fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {

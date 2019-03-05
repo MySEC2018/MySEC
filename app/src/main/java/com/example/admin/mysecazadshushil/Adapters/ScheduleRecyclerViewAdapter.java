@@ -6,11 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.admin.mysecazadshushil.Models.Schedule_model;
 import com.example.admin.mysecazadshushil.R;
+import com.example.admin.mysecazadshushil.SchedulerActivity;
+import com.example.admin.mysecazadshushil.TeachersListCSE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +42,18 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
         holder.newSubjectTextView.setText(schedules.get(position).getSubject());
         holder.itemTextView.setText(schedules.get(position).getItem());
         holder.dayTextView.setText(schedules.get(position).getDay());
-    }
+        holder.timeTextView.setText("at "+schedules.get(position).getTime());
+        //animation for recycler view
+        setFadeAnimation(holder.dayTextView);
+        setFadeAnimation(holder.timeTextView);
 
+
+    }
+    private void setFadeAnimation(View view) {
+        AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(700);
+        view.startAnimation(anim);
+    }
     @Override
     public int getItemCount() {
         return schedules.size();
@@ -46,7 +61,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView newSubjectTextView, itemTextView, dayTextView;
+        TextView newSubjectTextView, itemTextView, dayTextView, timeTextView;
         RelativeLayout parentLayout;
 
         ViewHolder(View view) {
@@ -56,6 +71,7 @@ public class ScheduleRecyclerViewAdapter extends RecyclerView.Adapter<ScheduleRe
             newSubjectTextView = view.findViewById(R.id.newSubjectTextView);
             itemTextView = view.findViewById(R.id.itemTextView);
             dayTextView = view.findViewById(R.id.dayTextView);
+            timeTextView=view.findViewById(R.id.timeTextView);
         }
     }
 }
