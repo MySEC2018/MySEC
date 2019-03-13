@@ -27,9 +27,12 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -40,12 +43,12 @@ import java.util.Map;
 
 public class HolidaysNews extends AppCompatActivity {
     private ImageButton addimage,searchbt, closebt;
-    private EditText htitile, hdate, hmonth, hdurtext, hdurday, insearcht;
-    private Button sub;
-    private CardView addingvisibility, deletevisibility;
+    private EditText htitile, hdate, hmonth, hdurtext, hdurday, insearcht,uphtitile, uphdate, uphmonth, uphdurtext, uphdurday;
+    private Button sub, update;
+    private CardView addingvisibility, deletevisibility, updatevisibility;
     private Uri imageUri;
     private StorageReference mstorage;
-    private DatabaseReference mdatabase;
+    private DatabaseReference mdatabase, upmdatabase;
     private static final int GALLERY_REQUEST=1;
     private ProgressDialog mprogreesdialog;
     private RecyclerView holi_recycle;
@@ -65,6 +68,14 @@ public class HolidaysNews extends AppCompatActivity {
         hmonth=(EditText)findViewById(R.id.holi_month);
         hdurtext=(EditText)findViewById(R.id.holi_dur_text);
         hdurday=(EditText)findViewById(R.id.holi_dur_day);
+
+        uphtitile=(EditText)findViewById(R.id.holi_tittle_up);
+        uphdate=(EditText)findViewById(R.id.holi_date_up);
+        uphmonth=(EditText)findViewById(R.id.holi_month_up);
+        uphdurtext=(EditText)findViewById(R.id.holi_dur_text_up);
+        uphdurday=(EditText)findViewById(R.id.holi_dur_day_up);
+
+        update=(Button)findViewById(R.id.holi_update);
         sub=(Button)findViewById(R.id.holi_submit);
         getkey=(EditText)findViewById(R.id.holi_key);
         delete_holi=(Button)findViewById(R.id.holi_delete);
@@ -75,6 +86,7 @@ public class HolidaysNews extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         addingvisibility=(CardView) findViewById(R.id.cardvisibleadd);
         deletevisibility=(CardView) findViewById(R.id.cardvisibledelete);
+        updatevisibility=(CardView) findViewById(R.id.cardvisibleupdate);
         try {
             Bundle bun = getIntent().getExtras();
             String val = bun.getString("login");
@@ -161,7 +173,80 @@ public class HolidaysNews extends AppCompatActivity {
                 }
             }
         });
+        //updating section is here
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mprogreesdialog.setMessage("Posting to Path...");
+                mprogreesdialog.show();
+                final String hhtitle=uphtitile.getText().toString();
+                final String hhdate=uphdate.getText().toString();
+                final String hhmonth=uphmonth.getText().toString();
+                final String hhdurtext=uphdurtext.getText().toString();
+                final String hhdurday=uphdurday.getText().toString();
+                if(!TextUtils.isEmpty(hhtitle)&&!TextUtils.isEmpty(hhdate)&&!TextUtils.isEmpty(hhmonth)&&!TextUtils.isEmpty(hhdurtext)&&!TextUtils.isEmpty(hhdurday))
+                {
+                    mdatabase = FirebaseDatabase.getInstance().getReference()
+                            .child("Holidays").child(getkey.getText().toString());
+                    mdatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            dataSnapshot.getRef().child("h_tittle").setValue(hhtitle);
+                            dataSnapshot.getRef().child("h_date").setValue(hhdate);
+                            dataSnapshot.getRef().child("h_month").setValue(hhmonth);
+                            dataSnapshot.getRef().child("h_dur_text").setValue(hhdurtext);
+                            dataSnapshot.getRef().child("h_dur_day").setValue(hhdurday);
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    //final DatabaseReference newPost=mdatabase.push();
+                    //mdatabase.child("h_tittle").setValue(hhtitle);
+                    //mdatabase.child("h_date").setValue(hhdate);
+                    //mdatabase.child("h_month").setValue(hhmonth);
+                    //mdatabase.child("h_dur_text").setValue(hhdurtext);
+                    //mdatabase.child("h_dur_day").setValue(hhdurday);
+                    mprogreesdialog.dismiss();
+                    /*final StorageReference filepath=mstorage.child("TechlistCSE").child(imageUri.getLastPathSegment());
+                    filepath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //Uri downloaduri=taskSnapshot.getDownloadUrl();
+                            //Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
+                            final DatabaseReference newPost=mdatabase.push();
+                            newPost.child("tech_name").setValue(ttname);
+                            newPost.child("tech_position").setValue(tposition);
+                            newPost.child("tech_contact").setValue(tcontact);
+                            //newPost.child("tech_img").setValue(u.toString());
+                            filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Map newImage = new HashMap();
+                                    newImage.put("tech_image", uri.toString());
+                                    newPost.updateChildren(newImage);
+
+                                    //finish();
+                                    return;
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    //finish();
+                                    return;
+                                }
+                            });
+
+                            mprogreesdialog.dismiss();
+                        }
+                    });*/
+                }
+            }
+        });
+
+        //Deleting a list
         delete_holi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,6 +256,8 @@ public class HolidaysNews extends AppCompatActivity {
                 mdatabase.removeValue();
             }
         });
+
+        //searching from list
 
         searchbt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,6 +312,15 @@ public class HolidaysNews extends AppCompatActivity {
             @Override
             protected void populateViewHolder(HolidaysNews.HoliViewholder viewHolder, AddHolidays model, int position) {
                 final String holi_key=getRef(position).getKey();
+
+                //updating part
+                final String up_tittle=model.getH_tittle();
+                final String up_date=model.getH_date();
+                final String up_month=model.getH_month();
+                final String up_dur_text=model.getH_dur_text();
+                final String up_dur_day=model.getH_dur_day();
+
+
                 //final String tech_key=getRef(position).toString(); //for showing the database reading
                 viewHolder.settittle(model.getH_tittle());
                 viewHolder.sethdate(model.getH_date());
@@ -237,6 +333,13 @@ public class HolidaysNews extends AppCompatActivity {
                     public void onClick(View v) {
                         Toast.makeText(HolidaysNews.this,holi_key,Toast.LENGTH_LONG).show();
                         getkey.setText(holi_key.toString().trim());
+
+                        //updating part
+                        uphtitile.setText(up_tittle.toString().trim());
+                        uphmonth.setText(up_month.toString().trim());
+                        uphdate.setText(up_date.toString().trim());
+                        uphdurtext.setText(up_dur_text.toString().trim());
+                        uphdurday.setText(up_dur_day.toString().trim());
                     }
                 });
 
@@ -249,11 +352,19 @@ public class HolidaysNews extends AppCompatActivity {
     public void deleteactive(View view) {
         deletevisibility.setVisibility(View.VISIBLE);
         addingvisibility.setVisibility(View.GONE);
+        updatevisibility.setVisibility(View.GONE);
     }
 
     public void Addactive(View view) {
         deletevisibility.setVisibility(View.GONE);
+        updatevisibility.setVisibility(View.GONE);
         addingvisibility.setVisibility(View.VISIBLE);
+    }
+
+    public void updateactive(View view) {
+        deletevisibility.setVisibility(View.GONE);
+        addingvisibility.setVisibility(View.GONE);
+        updatevisibility.setVisibility(View.VISIBLE);
     }
 
     public static class HoliViewholder extends RecyclerView.ViewHolder{
