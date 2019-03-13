@@ -139,6 +139,11 @@
                     android:text="submit"
                     android:id="@+id/holi_submit"
                     />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    >
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="wrap_content"
@@ -158,6 +163,146 @@
                         android:onClick="deleteactive"
                         />
                 </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="5dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_height="wrap_content"
+                    card_view:contentPaddingRight="10dp"
+                    card_view:contentPaddingLeft="10dp"
+                    card_view:cardCornerRadius="4dp"
+                    android:layout_gravity="end"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Update a list"
+                        android:onClick="updateactive"
+                        />
+                </android.support.v7.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            card_view:cardCornerRadius="5dp"
+            android:id="@+id/cardvisibleupdate"
+            android:visibility="gone"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/visibletechcseupdate"
+                >
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/holi_tittle_up"
+                    android:hint="Eid Vacation"
+                    android:padding="5dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/edittext_style_merged_focuseandnormal"
+                    android:textColor="@color/MySECcolor"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/holi_date_up"
+                    android:hint="29"
+                    android:padding="5dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/edittext_style_merged_focuseandnormal"
+                    android:textColor="@color/MySECcolor"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/holi_month_up"
+                    android:hint="feb"
+                    android:layout_margin="2dp"
+                    android:padding="5dp"
+                    android:background="@drawable/edittext_style_merged_focuseandnormal"
+                    android:textColor="@color/MySECcolor"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/holi_dur_text_up"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/edittext_style_merged_focuseandnormal"
+                    android:hint="27 feb - 17 mar"
+                    android:padding="5dp"
+                    android:textColor="@color/MySECcolor"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/holi_dur_day_up"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/edittext_style_merged_focuseandnormal"
+                    android:hint="20 days"
+                    android:padding="5dp"
+                    android:textColor="@color/MySECcolor"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="update"
+                    android:id="@+id/holi_update"
+                    />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                >
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="5dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_height="wrap_content"
+                    card_view:contentPaddingRight="10dp"
+                    card_view:contentPaddingLeft="10dp"
+                    card_view:cardCornerRadius="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_gravity="end"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add a list"
+                        android:onClick="Addactive"
+                        />
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="5dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_height="wrap_content"
+                    card_view:contentPaddingRight="10dp"
+                    card_view:contentPaddingLeft="10dp"
+                    card_view:cardCornerRadius="4dp"
+                    android:layout_gravity="end"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Delete a list"
+                        android:onClick="deleteactive"
+                        />
+
+                </android.support.v7.widget.CardView>
+                </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
@@ -188,6 +333,11 @@
                     android:text="delete"
                     android:id="@+id/holi_delete"
                     />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    >
                 <android.support.v7.widget.CardView
                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="wrap_content"
@@ -207,6 +357,26 @@
                         android:onClick="Addactive"
                         />
                 </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="5dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_height="wrap_content"
+                    card_view:contentPaddingRight="10dp"
+                    card_view:contentPaddingLeft="10dp"
+                    card_view:cardCornerRadius="4dp"
+                    android:layout_gravity="end"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Update a list"
+                        android:onClick="updateactive"
+                        />
+                </android.support.v7.widget.CardView>
+                </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
         <LinearLayout
