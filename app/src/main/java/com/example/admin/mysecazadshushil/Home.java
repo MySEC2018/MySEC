@@ -1,6 +1,7 @@
 package com.example.admin.mysecazadshushil;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,12 +11,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -27,6 +31,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.joooonho.SelectableRoundedImageView;
 
 import java.util.ArrayList;
@@ -37,7 +50,7 @@ import maes.tech.intentanim.CustomIntent;
 import me.relex.circleindicator.CircleIndicator;
 
 public class Home extends AppCompatActivity {
-    Dialog mydialog, logindia;
+     Dialog mydialog, logindia;
      ImageView mImage;
      SelectableRoundedImageView roundImage;
      Uri mImageUri;
@@ -52,8 +65,6 @@ public class Home extends AppCompatActivity {
     String email, pass;
     TextView success, fail;
     LinearLayout loginp, adminp,techcsesection,campsection, sylopen, Holiopen;
-
-
     private DrawerLayout myDrawer;
     private ActionBarDrawerToggle myToggle;
     private LinearLayout l1;
@@ -62,6 +73,13 @@ public class Home extends AppCompatActivity {
     private static final Integer[] XMEN= {R.drawable.two,R.drawable.three, R.drawable.one, R.drawable.four, R.drawable.five};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
     private static Context context;
+    private FirebaseAuth mauth;
+    private FirebaseAuth.AuthStateListener mauthlisten;
+    private DatabaseReference mdatabase;
+    private ProgressDialog mprogreesdialog;
+    private CardView logincard, logoutcard;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +87,25 @@ public class Home extends AppCompatActivity {
         getSupportActionBar().setTitle("Welcome");
         Home.context = getApplicationContext();
         init();
+
+        //firebase auth
+        mauth=FirebaseAuth.getInstance();
+        mdatabase= FirebaseDatabase.getInstance().getReference().child("admin");
+        mprogreesdialog=new ProgressDialog(this);
+        logincard=(CardView)findViewById(R.id.logincard);
+        logoutcard=(CardView)findViewById(R.id.logoutcard);
+
+        mauth=FirebaseAuth.getInstance();
+        mauthlisten=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser()!=null)
+                {
+                    logoutcard.setVisibility(View.VISIBLE);
+                    logincard.setVisibility(View.GONE);
+                }
+            }
+        };
 
         ///header layout part
         mydialog=new Dialog(this);
@@ -194,6 +231,13 @@ public void AzadIntentAnimation()
     CustomIntent.customType(this, "right-to-left");
 
 }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mauth.addAuthStateListener(mauthlisten);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(myToggle.onOptionsItemSelected(item)) {
@@ -279,8 +323,10 @@ public void AzadIntentAnimation()
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(loginemail.getText().toString().trim().equals(email) && loginpass.getText().toString().trim().equals(pass))
+                mprogreesdialog.setMessage("Checking...");
+                mprogreesdialog.show();
+                logingtest();
+               /* if(loginemail.getText().toString().trim().equals(email) && loginpass.getText().toString().trim().equals(pass))
                 {
                     success.setVisibility(View.VISIBLE);
                     fail.setVisibility(View.GONE);
@@ -339,7 +385,113 @@ public void AzadIntentAnimation()
                 else {
                     fail.setVisibility((View.VISIBLE));
                     success.setVisibility(View.GONE);
+                }*/
+            }
+
+        });
+    }
+
+    //login with firebase authentication
+    public  void logingtest()
+    {
+        String email=loginemail.getText().toString();
+        String pass=loginpass.getText().toString();
+        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass))
+        {
+            mauth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful())
+                    {
+                        mprogreesdialog.dismiss();
+                        //checkuserExitst();
+                        adminvisible();
+                        logincard.setVisibility(View.GONE);
+                        logoutcard.setVisibility(View.VISIBLE);
+
+                    }else{
+                        mprogreesdialog.dismiss();
+                        fail.setVisibility((View.VISIBLE));
+                        success.setVisibility(View.GONE);
+                    }
                 }
+            });
+        }
+    }
+    public void checkuserExitst()
+    {
+        final String user_id=mauth.getCurrentUser().getUid();
+        mdatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(user_id))
+                {
+                    Intent loginIntent=new Intent(Home.this, CampusNews.class);
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(loginIntent);
+                } else {
+                    //Toast.makeText(Home.this, "Invalid", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+    public void adminvisible()
+    {
+        success.setVisibility(View.VISIBLE);
+        fail.setVisibility(View.GONE);
+        loginp.setVisibility(View.GONE);
+        adminp.setVisibility(View.VISIBLE);
+
+
+
+        techcsesection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                //try{campusNews.visible();}catch (Exception ex){}
+                Intent nextintent=new Intent(Home.this, TeachersListCSE.class);
+                nextintent.putExtras(bundle);
+                startActivity(nextintent);
+            }
+        });
+        campsection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                //try{campusNews.visible();}catch (Exception ex){}
+                Intent nextintent=new Intent(Home.this, CampusNews.class);
+                nextintent.putExtras(bundle);
+                startActivity(nextintent);
+            }
+        });
+        sylopen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                //try{campusNews.visible();}catch (Exception ex){}
+                Intent nextintent=new Intent(Home.this, Syllabus.class);
+                nextintent.putExtras(bundle);
+                startActivity(nextintent);
+            }
+        });
+        Holiopen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                //try{campusNews.visible();}catch (Exception ex){}
+                Intent nextintent=new Intent(Home.this, HolidaysNews.class);
+                nextintent.putExtras(bundle);
+                startActivity(nextintent);
             }
         });
     }
@@ -439,5 +591,10 @@ public void AzadIntentAnimation()
         Intent intent=new Intent(this,SchedulerActivity.class);
         startActivity(intent);
         AzadIntentAnimation();
+    }
+
+    public void logout(View view) {
+        mauth.signOut();
+        logincard.setVisibility(View.VISIBLE);
     }
 }

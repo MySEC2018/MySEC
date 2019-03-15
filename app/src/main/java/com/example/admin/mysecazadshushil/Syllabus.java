@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -32,6 +33,9 @@ public class Syllabus extends AppCompatActivity {
     Button deletesyl;
     private static final String TAG = "Syllabus";
     private FragmentManager fm;
+    private FirebaseAuth mauth;
+    private FirebaseAuth.AuthStateListener mauthlisten;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,19 @@ public class Syllabus extends AppCompatActivity {
         getSupportActionBar().setTitle("Files");
         addingvisibility=(CardView) findViewById(R.id.syllabusvisiblein);
         admindelvisible=(CardView) findViewById(R.id.syllabusvisibledel);
+
+        mauth=FirebaseAuth.getInstance();
+        mauthlisten=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser()!=null)
+                {
+                    addingvisibility.setVisibility(View.VISIBLE);
+                    admindelvisible.setVisibility(View.VISIBLE);
+                }
+            }
+        };
+
         try {
             Bundle bun = getIntent().getExtras();
             String val = bun.getString("login");
@@ -74,6 +91,13 @@ public class Syllabus extends AppCompatActivity {
 
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mauth.addAuthStateListener(mauthlisten);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
