@@ -34,6 +34,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -66,6 +67,9 @@ public class CampusNews extends AppCompatActivity {
     private CardView addingvisibility, deletevisibility;
     private CardView cardViewvisible;
 
+    private FirebaseAuth mauth;
+    private FirebaseAuth.AuthStateListener mauthlisten;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,18 @@ public class CampusNews extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         addingvisibility=(CardView) findViewById(R.id.cardvisibleadd);
         deletevisibility=(CardView) findViewById(R.id.cardvisibledelete);
+
+        mauth=FirebaseAuth.getInstance();
+        mauthlisten=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser()!=null)
+                {
+                    addingvisibility.setVisibility(View.VISIBLE);
+                }
+            }
+        };
+
         try {
             Bundle bun = getIntent().getExtras();
             String val = bun.getString("login");
@@ -233,6 +249,8 @@ public class CampusNews extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        mauth.addAuthStateListener(mauthlisten);
         //implementation 'com.firebaseui:firebase-ui-database:0.4.0'
         final FirebaseRecyclerAdapter<AddCampusNews, CampNewsViewholder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<AddCampusNews, CampNewsViewholder>( AddCampusNews.class,
                 R.layout.list_layout,

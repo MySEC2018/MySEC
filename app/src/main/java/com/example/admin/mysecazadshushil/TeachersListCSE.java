@@ -36,6 +36,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -67,6 +68,8 @@ private RecyclerView tech_cse_recycle;
 private EditText getkey;
 private Button delete_tech;
 private CardView cardViewvisible;
+private FirebaseAuth mauth;
+private FirebaseAuth.AuthStateListener mauthlisten;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +100,18 @@ private CardView cardViewvisible;
                 addingvisibility.setVisibility(View.VISIBLE);
             }
         }catch (Exception ex){}
+
+        mauth=FirebaseAuth.getInstance();
+        mauthlisten=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser()!=null)
+                {
+                    addingvisibility.setVisibility(View.VISIBLE);
+                }
+            }
+        };
+
 
         mprogreesdialog=new ProgressDialog(this);
 
@@ -233,6 +248,7 @@ private CardView cardViewvisible;
     @Override
     protected void onStart() {
         super.onStart();
+        mauth.addAuthStateListener(mauthlisten);
         //implementation 'com.firebaseui:firebase-ui-database:0.4.0'
         FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder>( AddteacherListCSE.class,
                 R.layout.list_layout_teacher_cse,

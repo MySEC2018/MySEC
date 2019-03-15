@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +56,9 @@ public class HolidaysNews extends AppCompatActivity {
     private EditText getkey;
     private Button delete_holi;
     private CardView cardViewvisible;
+    private FirebaseAuth mauth;
+    private FirebaseAuth.AuthStateListener mauthlisten;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +67,18 @@ public class HolidaysNews extends AppCompatActivity {
         mstorage= FirebaseStorage.getInstance().getReference();
         mdatabase= FirebaseDatabase.getInstance().getReference().child("Holidays");
         mdatabase.keepSynced(true);
+
+        mauth=FirebaseAuth.getInstance();
+        mauthlisten=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser()!=null)
+                {
+                    addingvisibility.setVisibility(View.VISIBLE);
+                }
+            }
+        };
+
         htitile=(EditText)findViewById(R.id.holi_tittle);
         hdate=(EditText)findViewById(R.id.holi_date);
         hmonth=(EditText)findViewById(R.id.holi_month);
@@ -303,6 +319,9 @@ public class HolidaysNews extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        mauth.addAuthStateListener(mauthlisten);
+
         //implementation 'com.firebaseui:firebase-ui-database:0.4.0'
         FirebaseRecyclerAdapter<AddHolidays, HolidaysNews.HoliViewholder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<AddHolidays, HolidaysNews.HoliViewholder>( AddHolidays.class,
                 R.layout.list_layout_holiday,
