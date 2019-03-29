@@ -56,7 +56,7 @@ public class Syllabus_upload_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //userId = getArguments().getString("userId");
-        userPath = "user/" + "azad" + "/";
+        userPath = "syllabus" + "/";
 
         View view = inflater.inflate(R.layout.fragment_syllabus_upload_fragment,
                 container, false);
@@ -131,7 +131,7 @@ public class Syllabus_upload_frag extends Fragment {
     }
 
     private void addFileNameToDB(final String fileNAME) {
-        String docKey = userId+fileNAME;
+        String docKey =fileNAME;    //userid+filename chilo
         Map<String, String> mp = new HashMap<String, String>();
         mp.put("storagePath", fileNAME);
         //mp.put("date", getTodaysDate());

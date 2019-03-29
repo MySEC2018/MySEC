@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".TeachersListCSE"
+    >
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/tech_search"
+        android:title="Search"
+        />
+    <item
+        android:id="@+id/tech_searchcse"
+        android:title="Only CSE" />
+    <item
+        android:id="@+id/tech_searchee"
+        android:title="Only EEE" />
+    <item
+        android:id="@+id/tech_searchce"
+        android:title="Only CE" />
+    </group>
+</menu>

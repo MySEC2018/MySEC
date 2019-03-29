@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Home"
+    >
+    <item android:title="Call to office"
+        android:icon="@drawable/refresh"
+        android:id="@+id/call"
+        />
+    <item android:title="Email to sec"
+        android:icon="@drawable/shareicon"
+        android:id="@+id/Email"
+        />
+</menu>

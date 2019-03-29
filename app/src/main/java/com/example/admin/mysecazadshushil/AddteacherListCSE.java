@@ -5,15 +5,10 @@ public class AddteacherListCSE {
      String tech_positon;
      String tech_contact;
      String tech_img;
+    String tech_dept;
     public AddteacherListCSE()
     {
 
-    }
-    public AddteacherListCSE(String tech_name, String tech_positon, String tech_contact, String tech_img) {
-        this.tech_name = tech_name;
-        this.tech_positon = tech_positon;
-        this.tech_contact = tech_contact;
-        this.tech_img = tech_img;
     }
     public void setTech_name(String tech_name) {
         this.tech_name = tech_name;
@@ -44,6 +39,13 @@ public class AddteacherListCSE {
 
     public String getTech_image() {
         return tech_img;
+    }
+    public String getTech_dept() {
+        return tech_dept;
+    }
+
+    public void setTech_dept(String tech_dept) {
+        this.tech_dept = tech_dept;
     }
 
 }

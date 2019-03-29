@@ -86,7 +86,7 @@ public class Syllabus_view_fg_ad extends Fragment {
                             }
                             Syllabus_recycler_adapter_admin recyclerViewAdapter = new
                                     Syllabus_recycler_adapter_admin(fileList,
-                                    getActivity(), userId);
+                                    getActivity(),null);  //userid
                             filesRecyclerView.setAdapter(recyclerViewAdapter);
 
                         } else {

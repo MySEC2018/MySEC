@@ -1,5 +1,7 @@
 package com.example.admin.mysecazadshushil;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -61,6 +63,13 @@ public class SchedulerActivity extends AppCompatActivity {
         final ScheduleRecyclerViewAdapter recyclerViewAdapter = new ScheduleRecyclerViewAdapter(this, schedules);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Animation animationUtils=AnimationUtils.loadAnimation(this, R.anim.itemrecyclerviewanimation);
+        recyclerView.startAnimation(animationUtils);
+        /*AnimatorSet animatorSet=new AnimatorSet();
+        ObjectAnimator animatortranslate=ObjectAnimator.ofFloat(recyclerView, "translationY", true?400: -400,0);
+        animatortranslate.setDuration(900);
+        animatorSet.play(animatortranslate);
+        animatorSet.start();*/
 
         SwipeHelper swipeHelper = new SwipeHelper(this, recyclerView) {
             @Override

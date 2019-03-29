@@ -47,10 +47,25 @@ public class NewScheduleActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String timeSet;
                 String day = daySpinner.getSelectedItem().toString();
                 String item = itemSpinner.getSelectedItem().toString();
                 String subject = subjectTextView.getText().toString();
-                String time = timePicker.getCurrentHour().toString() + " : " + timePicker.getCurrentMinute().toString();
+                int hour=Integer.parseInt(timePicker.getCurrentHour().toString());
+                if (hour > 12) {
+                    hour -= 12;
+                    timeSet = "PM";
+                } else if (hour == 0) {
+                    hour += 12;
+                    timeSet = "AM";
+                } else if (hour == 12){
+                    timeSet = "PM";
+                }else{
+                    timeSet = "AM";
+                }
+
+                String time = hour + " : " + timePicker.getCurrentMinute().toString()+" "+timeSet;
+
 
                 if (!TextUtils.isEmpty(day) && !TextUtils.isEmpty(subject) && !TextUtils.isEmpty(item) && !TextUtils.isEmpty(time)) {
                     if (scheduleDbHelper.addData(day, item, subject, time)) {

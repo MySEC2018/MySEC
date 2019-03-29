@@ -1,11 +1,10 @@
 package com.example.admin.mysecazadshushil;
 
-import android.app.ActionBar;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,28 +13,26 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,16 +40,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
+import com.joooonho.SelectableRoundedImageView;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Queue;
-
-import maes.tech.intentanim.CustomIntent;
 
 public class TeachersListCSE extends AppCompatActivity {
 private ImageButton addimage,searchbt, closebt;
@@ -70,6 +64,8 @@ private Button delete_tech;
 private CardView cardViewvisible;
 private FirebaseAuth mauth;
 private FirebaseAuth.AuthStateListener mauthlisten;
+private RadioButton search, cse, eee, ce;
+private Spinner tdept;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +78,10 @@ private FirebaseAuth.AuthStateListener mauthlisten;
         tname=(EditText)findViewById(R.id.tech_name);
         position=(EditText)findViewById(R.id.tech_position);
         contact=(EditText)findViewById(R.id.tech_contact);
+
+        tdept=(Spinner)findViewById(R.id.tech_dept);
+        setupSpinners();
+
         sub=(Button)findViewById(R.id.tech_submit);
         getkey=(EditText)findViewById(R.id.tech_key);
         delete_tech=(Button)findViewById(R.id.tech_delete);
@@ -118,6 +118,7 @@ private FirebaseAuth.AuthStateListener mauthlisten;
         tech_cse_recycle=(RecyclerView)findViewById(R.id.tech_cse_recycler);
         tech_cse_recycle.setHasFixedSize(true);
         tech_cse_recycle.setLayoutManager(new LinearLayoutManager(this));
+        //runanimationrecyle(tech_cse_recycle, 0);
 
         closebt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +145,7 @@ private FirebaseAuth.AuthStateListener mauthlisten;
             final String ttname=tname.getText().toString().trim().toLowerCase();
             final String tposition=position.getText().toString().trim();
             final String tcontact=contact.getText().toString().trim();
+            final String dept=tdept.getSelectedItem().toString().trim();
             if(!TextUtils.isEmpty(ttname)&&!TextUtils.isEmpty(tposition)&&!TextUtils.isEmpty(tcontact))
             {
                 final StorageReference filepath=mstorage.child("TechlistCSE").child(imageUri.getLastPathSegment());
@@ -156,6 +158,7 @@ private FirebaseAuth.AuthStateListener mauthlisten;
                         newPost.child("tech_name").setValue(ttname);
                         newPost.child("tech_position").setValue(tposition);
                         newPost.child("tech_contact").setValue(tcontact);
+                        newPost.child("tech_dept").setValue("Dept. of "+dept);
                         //newPost.child("tech_img").setValue(u.toString());
                         filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
@@ -196,15 +199,27 @@ private FirebaseAuth.AuthStateListener mauthlisten;
         @Override
         public void onClick(View v) {
             String searchtext=insearcht.getText().toString().trim().toLowerCase();
-            searchteacherlist(searchtext);
+            String orderchild="tech_name";
+            searchteacherlist(searchtext, orderchild);
         }
     });
 
     }
-    private  void searchteacherlist(String searchtxt)
+
+    private void runanimationrecyle(RecyclerView recyclerView, int type) {
+        Context context=recyclerView.getContext();
+        LayoutAnimationController controller=null;
+        if(type==0)
+            controller=AnimationUtils.loadLayoutAnimation(context, R.anim.layoutrecycleviewanimation);
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
+    }
+
+    private  void searchteacherlist(String searchtxt, String orderchild)
     {
         Toast.makeText(this, "Searching: "+searchtxt, Toast.LENGTH_SHORT).show();
-        Query query=mdatabase.orderByChild("tech_name").startAt(searchtxt).endAt(searchtxt+"\uf8ff");
+        Query query=mdatabase.orderByChild(orderchild).startAt(searchtxt).endAt(searchtxt+"\uf8ff");
        // Query query=mdatabase.orderByChild("tech_name").equalTo(searchtxt);
         FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder>(
                 AddteacherListCSE.class,
@@ -221,12 +236,19 @@ private FirebaseAuth.AuthStateListener mauthlisten;
                 viewHolder.settechname(model.getTech_name());
                 viewHolder.settechposition(model.getTech_position());
                 viewHolder.settechcontact(model.getTech_contact());
+                viewHolder.settechdept(model.getTech_dept());
                 viewHolder.settechimage(model.getTech_image());
+
+                AnimatorSet animatorSet=new AnimatorSet();
+                ObjectAnimator animatortranslate=ObjectAnimator.ofFloat(viewHolder.itemView, "translationY", true?400: -400,0);
+                animatortranslate.setDuration(900);
+                animatorSet.playSequentially(animatortranslate);
+                animatorSet.start();
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(TeachersListCSE.this,tech_key,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(TeachersListCSE.this,tech_key,Toast.LENGTH_LONG).show();
                         getkey.setText(tech_key.toString().trim());
                     }
                 });
@@ -264,12 +286,19 @@ private FirebaseAuth.AuthStateListener mauthlisten;
                 viewHolder.settechname(model.getTech_name());
                 viewHolder.settechposition(model.getTech_position());
                 viewHolder.settechcontact(model.getTech_contact());
+                viewHolder.settechdept(model.getTech_dept());
                 viewHolder.settechimage(model.getTech_image());
+
+                AnimatorSet animatorSet=new AnimatorSet();
+                ObjectAnimator animatortranslate=ObjectAnimator.ofFloat(viewHolder.itemView, "translationY", true?400: -400,0);
+                animatortranslate.setDuration(900);
+                animatorSet.play(animatortranslate);
+                animatorSet.start();
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(TeachersListCSE.this,tech_key,Toast.LENGTH_LONG).show();
+                       // Toast.makeText(TeachersListCSE.this,tech_key,Toast.LENGTH_LONG).show();
                         getkey.setText(tech_key.toString().trim());
                     }
                 });
@@ -312,9 +341,15 @@ private FirebaseAuth.AuthStateListener mauthlisten;
             TextView techcsecontact=(TextView) mView.findViewById(R.id.tech_list_contact);
             techcsecontact.setText(contact);
         }
+        public void settechdept(String dept)
+        {
+            TextView techcsedept=(TextView) mView.findViewById(R.id.tech_list_dept);
+            techcsedept.setText(dept);
+        }
         public void settechimage(String image)
         {
-            ImageView techcseimage=(ImageView) mView.findViewById(R.id.tech_list_image);
+            SelectableRoundedImageView techimage=(SelectableRoundedImageView)mView.findViewById(R.id.tech_list_image);
+            //ImageView techcseimage=(ImageView) mView.findViewById(R.id.tech_list_image);
             //Picasso.with(ctx).load(image).into(techcseimage);
             /*Picasso.with(ctx)
                     .load(image)
@@ -323,7 +358,7 @@ private FirebaseAuth.AuthStateListener mauthlisten;
                     .into(techcseimage);
             Picasso.with(ctx).setLoggingEnabled(true);*/
 
-            Picasso.get().load(image).centerCrop().placeholder(R.mipmap.ic_launcher).fit().into(techcseimage);
+            Picasso.get().load(image).centerCrop().placeholder(R.mipmap.ic_launcher).fit().into(techimage);
 
 
         }
@@ -332,7 +367,7 @@ private FirebaseAuth.AuthStateListener mauthlisten;
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater menuInflater=getMenuInflater();
-        menuInflater.inflate(R.menu.teacher_search_toolbar, menu);
+        menuInflater.inflate(R.menu.tech_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -344,8 +379,37 @@ private FirebaseAuth.AuthStateListener mauthlisten;
                 cardViewvisible.setVisibility(View.VISIBLE);
                 Animation anim= AnimationUtils.loadAnimation(this, R.anim.searchopen);
                 cardViewvisible.startAnimation(anim);
-                break;
+                item.setChecked(true);
+                return true;
+            case R.id.tech_searchcse:
+                item.setChecked(true);
+                String searchtext1="Dept. of CSE";
+                String orderchild1="tech_dept";
+                searchteacherlist(searchtext1, orderchild1);
+                return true;
+            case R.id.tech_searchee:
+                item.setChecked(true);
+                String searchtext2="Dept. of EEE";
+                String orderchild2="tech_dept";
+                searchteacherlist(searchtext2, orderchild2);
+                return true;
+            case R.id.tech_searchce:
+                item.setChecked(true);
+                String searchtext3="Dept. of CE";
+                String orderchild3="tech_dept";
+                searchteacherlist(searchtext3, orderchild3);
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void setupSpinners() {
+        List<String> dept = new ArrayList<>();
+        dept.add("CSE");
+        dept.add("EEE");
+        dept.add("CE");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dept);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tdept.setAdapter(dataAdapter);
     }
 }

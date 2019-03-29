@@ -1,29 +1,45 @@
 package com.example.admin.mysecazadshushil;
 
+import android.Manifest;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,7 +65,7 @@ import java.util.TimerTask;
 import maes.tech.intentanim.CustomIntent;
 import me.relex.circleindicator.CircleIndicator;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListener {
      Dialog mydialog, logindia;
      ImageView mImage;
      SelectableRoundedImageView roundImage;
@@ -58,13 +74,14 @@ public class Home extends AppCompatActivity {
      TextView setname;
      static final int PICK_IMAGE_REQUEST=1;
      Button namesetter, imagesetter;
-
+     Menu menuanimate;
+     public static final int requst_call=1;
 
     EditText loginemail, loginpass;
     static Button loginbutton;
     String email, pass;
     TextView success, fail;
-    LinearLayout loginp, adminp,techcsesection,campsection, sylopen, Holiopen;
+    LinearLayout loginp, adminp,techcsesection,campsection,campsetionad, sylopen, Holiopen;
     private DrawerLayout myDrawer;
     private ActionBarDrawerToggle myToggle;
     private LinearLayout l1;
@@ -77,7 +94,8 @@ public class Home extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mauthlisten;
     private DatabaseReference mdatabase;
     private ProgressDialog mprogreesdialog;
-    private CardView logincard, logoutcard;
+    private CardView logincard, logoutcard, adminpanelcard;
+
 
 
     @Override
@@ -94,6 +112,7 @@ public class Home extends AppCompatActivity {
         mprogreesdialog=new ProgressDialog(this);
         logincard=(CardView)findViewById(R.id.logincard);
         logoutcard=(CardView)findViewById(R.id.logoutcard);
+        adminpanelcard=(CardView) findViewById(R.id.adminpanelcard);
 
         mauth=FirebaseAuth.getInstance();
         mauthlisten=new FirebaseAuth.AuthStateListener() {
@@ -103,13 +122,14 @@ public class Home extends AppCompatActivity {
                 {
                     logoutcard.setVisibility(View.VISIBLE);
                     logincard.setVisibility(View.GONE);
+                    adminpanelcard.setVisibility(View.VISIBLE);
                 }
             }
         };
 
         ///header layout part
-        mydialog=new Dialog(this);
-        logindia=new Dialog(this);
+        mydialog=new Dialog(Home.this);
+        //logindia=new Dialog(Home.this);
         roundImage=(SelectableRoundedImageView) findViewById(R.id.userphoto);
         name=(EditText) findViewById(R.id.editname);
         setname=(TextView)findViewById (R.id.myname);
@@ -133,8 +153,13 @@ public class Home extends AppCompatActivity {
         myDrawer.addDrawerListener(myToggle);
         myToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         NavigationView navigationView = findViewById(R.id.nav_view);
+        /*AnimatorSet animatorSet=new AnimatorSet();
+        ObjectAnimator animatortranslate=ObjectAnimator.ofFloat(navigationView.getMenu().size(), "translationY", true?400: -400,0);
+        animatortranslate.setDuration(900);
+        animatorSet.play(animatortranslate);
+        animatorSet.start();*/
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -218,6 +243,8 @@ public class Home extends AppCompatActivity {
                     }
                 });
     }
+
+    
     public static Context getAppContext() {
         return Home.context;
     }
@@ -226,16 +253,60 @@ public class Home extends AppCompatActivity {
         float density = context.getResources().getDisplayMetrics().density;
         return (int) (dimensionDp * density + 0.5f);
     }
-public void AzadIntentAnimation()
-{
-    CustomIntent.customType(this, "right-to-left");
-
-}
+    public void AzadIntentAnimation()
+    {
+        CustomIntent.customType(this, "right-to-left");
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
         mauth.addAuthStateListener(mauthlisten);
+    }
+    public void calling()
+    {
+        String number="01732914039";
+        if(number.trim().length()>0)
+        {
+            if(ContextCompat.checkSelfPermission(Home.this,
+                    Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(Home.this,
+                        new String[]{Manifest.permission.CALL_PHONE},requst_call);
+            }else{
+                String dial="tel:"+number;
+                startActivity(new Intent(Intent.ACTION_CALL,Uri.parse(dial)));
+            }
+        }
+    }
+    public void emailing()
+    {
+        String recipient="info@sec.ac.bd";
+        String subject="";
+        String meassage="";
+        Intent eintent=new Intent(Intent.ACTION_SEND);
+        eintent.setData(Uri.parse("Mail to SEC:"));
+        eintent.setType("text/plain");
+        eintent.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient});
+        try{
+            startActivity(Intent.createChooser(eintent, "Choose an Email Client"));
+        }catch (Exception ex){
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==requst_call)
+        {
+            if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
+            {
+                calling();
+            }
+            else{
+                Toast.makeText(this, "Permision Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -243,7 +314,41 @@ public void AzadIntentAnimation()
         if(myToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        switch (item.getItemId())
+        {
+            case R.id.call:
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(Home.this);
+                dialog.setMessage("Are you sure?");
+                dialog.setTitle("Call to office");
+                dialog.setIcon(android.R.drawable.ic_dialog_alert);
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        calling();
+                    }
+                });
+                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                dialog.show();
+                break;
+            case R.id.Email:
+                emailing();
+                break;
+        }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.home_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     boolean twice=false;
@@ -299,10 +404,13 @@ public void AzadIntentAnimation()
             }
         }, 2500, 2500);
     }
-
     public void loginDialog(View view)
     {
+        logindia=new Dialog(Home.this);
+        logindia.requestWindowFeature(Window.FEATURE_NO_TITLE);
         logindia.setContentView(R.layout.activity_login);
+        Window window = logindia.getWindow();
+        window.setLayout(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
         logindia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         logindia.show();
 
@@ -408,6 +516,7 @@ public void AzadIntentAnimation()
                         adminvisible();
                         logincard.setVisibility(View.GONE);
                         logoutcard.setVisibility(View.VISIBLE);
+                        adminpanelcard.setVisibility(View.VISIBLE);
 
                     }else{
                         mprogreesdialog.dismiss();
@@ -450,6 +559,53 @@ public void AzadIntentAnimation()
 
 
 
+        techcsesection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                //try{campusNews.visible();}catch (Exception ex){}
+                Intent nextintent=new Intent(Home.this, TeachersListCSE.class);
+                nextintent.putExtras(bundle);
+                startActivity(nextintent);
+            }
+        });
+        campsection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                //try{campusNews.visible();}catch (Exception ex){}
+                Intent nextintent=new Intent(Home.this, CampusNews.class);
+                nextintent.putExtras(bundle);
+                startActivity(nextintent);
+            }
+        });
+        sylopen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                //try{campusNews.visible();}catch (Exception ex){}
+                Intent nextintent=new Intent(Home.this, Syllabus.class);
+                nextintent.putExtras(bundle);
+                startActivity(nextintent);
+            }
+        });
+        Holiopen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                //try{campusNews.visible();}catch (Exception ex){}
+                Intent nextintent=new Intent(Home.this, HolidaysNews.class);
+                nextintent.putExtras(bundle);
+                startActivity(nextintent);
+            }
+        });
+    }
+    public void setAdminpanelcard()
+    {
         techcsesection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -596,5 +752,40 @@ public void AzadIntentAnimation()
     public void logout(View view) {
         mauth.signOut();
         logincard.setVisibility(View.VISIBLE);
+        adminpanelcard.setVisibility(View.GONE);
+    }
+    public void openadmnipanel(View view) {
+        logindia=new Dialog(Home.this);
+        logindia.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        logindia.setContentView(R.layout.activity_login);
+        Window window = logindia.getWindow();
+        window.setLayout(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
+        logindia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        logindia.show();
+        techcsesection=(LinearLayout) logindia.findViewById(R.id.techcseopen);
+        campsection=(LinearLayout) logindia.findViewById(R.id.campopen);
+        sylopen=(LinearLayout) logindia.findViewById(R.id.syllabusopen);
+        Holiopen=(LinearLayout)logindia.findViewById(R.id.holidaysopen);
+        setAdminpanelcard();
+    }
+
+    @Override
+    public void onDrawerSlide(@NonNull View view, float v) {
+        
+    }
+
+    @Override
+    public void onDrawerOpened(@NonNull View view) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(@NonNull View view) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int i) {
+
     }
 }
