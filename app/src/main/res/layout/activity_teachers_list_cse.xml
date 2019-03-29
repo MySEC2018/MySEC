@@ -115,9 +115,15 @@
                     android:id="@+id/tech_contact"
                     android:layout_margin="4dp"
                     android:background="@drawable/edittext_style_merged_focuseandnormal"
-                    android:hint="contact"
+                    android:hint="contact(+88017)"
                     android:padding="5dp"
                     android:textColor="@color/MySECcolor"
+                    />
+                <Spinner
+                    android:id="@+id/tech_dept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
                     />
                 <Button
                     android:layout_width="wrap_content"

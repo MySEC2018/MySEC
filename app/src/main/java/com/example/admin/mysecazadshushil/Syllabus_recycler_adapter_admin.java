@@ -33,7 +33,7 @@ public class Syllabus_recycler_adapter_admin extends
     private Context context;
     private FirebaseStorage firebaseStorage;
     private FirebaseFirestore firestoreDB;
-    private String userId;
+    //private String userId;
     private String userPath;
 
     private String DOWNLOAD_DIR = Environment.getExternalStoragePublicDirectory
@@ -43,7 +43,7 @@ public class Syllabus_recycler_adapter_admin extends
         fileList = list;
         context = ctx;
         //userId = uid;
-        userPath =  "user/" + "azad" + "/";
+        userPath = "syllabus" + "/";
     }
     @Override
     public int getItemCount() {
@@ -150,7 +150,7 @@ public class Syllabus_recycler_adapter_admin extends
         });
     }
     private void deleteFileNameFromDB(String fileName){
-        firestoreDB.collection("files").document(userId+fileName).delete()
+        firestoreDB.collection("files").document(fileName).delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

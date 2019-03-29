@@ -52,10 +52,24 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String timeSet;
                 String day = daySpinnerUpdate.getSelectedItem().toString();
                 String item = itemSpinnerUpdate.getSelectedItem().toString();
                 String subject = subjectTextViewUpdate.getText().toString();
-                String time = timePickerUpdate.getCurrentHour().toString() + " : " + timePickerUpdate.getCurrentMinute().toString();
+                int hour=Integer.parseInt(timePickerUpdate.getCurrentHour().toString());
+                if (hour > 12) {
+                    hour -= 12;
+                    timeSet = "PM";
+                } else if (hour == 0) {
+                    hour += 12;
+                    timeSet = "AM";
+                } else if (hour == 12){
+                    timeSet = "PM";
+                }else{
+                    timeSet = "AM";
+                }
+
+                String time = hour + " : " + timePickerUpdate.getCurrentMinute().toString()+" "+timeSet;
 
                 if (!TextUtils.isEmpty(day) && !TextUtils.isEmpty(subject) && !TextUtils.isEmpty(item) && !TextUtils.isEmpty(time)) {
                     if (scheduleDbHelper.updateById(id, day, item, subject, time)) {

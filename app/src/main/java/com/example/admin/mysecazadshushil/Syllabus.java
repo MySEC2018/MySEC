@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 //import zoftino.com.firestore.R;
 
 public class Syllabus extends AppCompatActivity {
-    private CardView addingvisibility, admindelvisible;
+    private CardView addingvisibility, admindelvisible, uservisible;
     //private FirebaseUser user;
     Button deletesyl;
     private static final String TAG = "Syllabus";
@@ -44,8 +44,9 @@ public class Syllabus extends AppCompatActivity {
         getSupportActionBar().setTitle("Files");
         addingvisibility=(CardView) findViewById(R.id.syllabusvisiblein);
         admindelvisible=(CardView) findViewById(R.id.syllabusvisibledel);
-
-        mauth=FirebaseAuth.getInstance();
+        uservisible=findViewById(R.id.syllabusvisibleuser);
+        //uservisible.setVisibility(View.VISIBLE);
+       /* mauth=FirebaseAuth.getInstance();
         mauthlisten=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -55,7 +56,7 @@ public class Syllabus extends AppCompatActivity {
                     admindelvisible.setVisibility(View.VISIBLE);
                 }
             }
-        };
+        };*/
 
         try {
             Bundle bun = getIntent().getExtras();
@@ -95,7 +96,8 @@ public class Syllabus extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mauth.addAuthStateListener(mauthlisten);
+        //uservisible.setVisibility(View.VISIBLE);
+        //mauth.addAuthStateListener(mauthlisten);
     }
 
     @Override
