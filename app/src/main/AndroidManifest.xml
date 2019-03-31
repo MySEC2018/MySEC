@@ -7,8 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -90,27 +89,26 @@
         <activity
             android:name=".HolidaysNews"
             android:parentActivityName=".Home" />
-        <activity android:name=".Syllabus"
-            android:parentActivityName=".Home">
-
-        </activity>
         <activity
-            android:name=".TeachersListCSE"
-            android:parentActivityName=".Home" >
-        </activity>
-        <activity android:name=".CGPA_calculator"
+            android:name=".Syllabus"
             android:parentActivityName=".Home"></activity>
         <activity
+            android:name=".TeachersListCSE"
+            android:parentActivityName=".Home"></activity>
+        <activity
+            android:name=".CGPA_calculator"
+            android:parentActivityName=".Home" />
+        <activity
             android:name=".SchedulerActivity"
-            android:parentActivityName=".Home"
-            />
+            android:parentActivityName=".Home" />
         <activity
             android:name=".NewScheduleActivity"
-            android:parentActivityName=".SchedulerActivity"
-             />
-        <activity android:name=".ScheduleUpdateActivity"
-            android:parentActivityName=".SchedulerActivity"
-            />
+            android:parentActivityName=".SchedulerActivity" />
+        <activity
+            android:name=".ScheduleUpdateActivity"
+            android:parentActivityName=".SchedulerActivity" />
+        <activity android:name=".StaffList"
+            android:parentActivityName=".Home"></activity>
     </application>
 
 </manifest>

@@ -39,7 +39,11 @@
     <item
         android:id="@+id/teacherslist"
         android:icon="@drawable/admissionnews"
-        android:title="Teacher List" />
+        android:title="Teachers List" />
+    <item
+        android:id="@+id/stafflist"
+        android:icon="@drawable/admissionnews"
+        android:title="Staff List" />
     <item
         android:id="@+id/syllabus"
         android:icon="@drawable/admissionnews"
