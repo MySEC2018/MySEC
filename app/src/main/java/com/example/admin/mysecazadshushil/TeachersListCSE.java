@@ -50,7 +50,7 @@ import java.util.Map;
 
 public class TeachersListCSE extends AppCompatActivity {
 private ImageButton addimage,searchbt, closebt;
-private EditText tname, position, contact, insearcht;
+private EditText tname, contact, insearcht;
 private Button sub;
 private CardView addingvisibility, deletevisibility;
 private Uri imageUri;
@@ -65,7 +65,7 @@ private CardView cardViewvisible;
 private FirebaseAuth mauth;
 private FirebaseAuth.AuthStateListener mauthlisten;
 private RadioButton search, cse, eee, ce;
-private Spinner tdept;
+private Spinner tdept,position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +76,7 @@ private Spinner tdept;
         mdatabase.keepSynced(true);
         addimage=(ImageButton)findViewById(R.id.tech_addimage);
         tname=(EditText)findViewById(R.id.tech_name);
-        position=(EditText)findViewById(R.id.tech_position);
+        position=(Spinner) findViewById(R.id.tech_position);
         contact=(EditText)findViewById(R.id.tech_contact);
 
         tdept=(Spinner)findViewById(R.id.tech_dept);
@@ -143,7 +143,7 @@ private Spinner tdept;
             mprogreesdialog.setMessage("Posting to Path...");
             mprogreesdialog.show();
             final String ttname=tname.getText().toString().trim().toLowerCase();
-            final String tposition=position.getText().toString().trim();
+            final String tposition=position.getSelectedItem().toString().trim();
             final String tcontact=contact.getText().toString().trim();
             final String dept=tdept.getSelectedItem().toString().trim();
             if(!TextUtils.isEmpty(ttname)&&!TextUtils.isEmpty(tposition)&&!TextUtils.isEmpty(tcontact))
@@ -358,7 +358,7 @@ private Spinner tdept;
                     .into(techcseimage);
             Picasso.with(ctx).setLoggingEnabled(true);*/
 
-            Picasso.get().load(image).centerCrop().placeholder(R.mipmap.ic_launcher).fit().into(techimage);
+            Picasso.get().load(image).centerCrop().placeholder(R.drawable.loading).fit().into(techimage);
 
 
         }
@@ -411,5 +411,18 @@ private Spinner tdept;
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dept);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tdept.setAdapter(dataAdapter);
+
+
+        List<String> posi = new ArrayList<>();
+        posi.add("Professor");
+        posi.add("Professor & Head");
+        posi.add("Head");
+        posi.add("Associate Professor");
+        posi.add("Assistant Professor");
+        posi.add("Lecturer");
+
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, posi);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        position.setAdapter(dataAdapter2);
     }
 }

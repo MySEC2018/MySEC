@@ -10,23 +10,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //import zoftino.com.firestore.R;
@@ -38,11 +44,14 @@ public class Syllabus_upload_frag extends Fragment {
 
     private FirebaseStorage firebaseStorage;
     private FirebaseFirestore firestoreDB;
-    private EditText filePath;
-
+    private EditText filePath, filetitle;
+    private Spinner filetype;
     private String userId;
     private String userPath;
     private ProgressDialog mprogreess;
+    private DatabaseReference mdatabase;
+    private Uri imageUri;
+    private StorageReference mstorage;
     private static final String[] PUBLIC_DIR = {Environment.getExternalStoragePublicDirectory
             (Environment.DIRECTORY_DOWNLOADS).getPath(),
             Environment.getExternalStoragePublicDirectory
@@ -63,9 +72,13 @@ public class Syllabus_upload_frag extends Fragment {
         mprogreess=new ProgressDialog(getActivity());
         Button button = (Button) view.findViewById(R.id.upload_b);
         filePath = view.findViewById(R.id.file_name);
+        filetitle=view.findViewById(R.id.file_title);
+        filetype=view.findViewById(R.id.file_type);
+        setupSpinners();
 
         firebaseStorage = FirebaseStorage.getInstance();
         firestoreDB = FirebaseFirestore.getInstance();
+        mdatabase= FirebaseDatabase.getInstance().getReference().child("Syllabus");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,13 +100,15 @@ public class Syllabus_upload_frag extends Fragment {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-        File file = new File(filePath);
+        final File file = new File(filePath);
         Uri fileUri = Uri.fromFile(file);
 
         final String toFilePath = userPath + fileUri.getLastPathSegment();
 
-        StorageReference storageRef = firebaseStorage.getReference();
-        StorageReference uploadeRef = storageRef.child(toFilePath);
+        mstorage= FirebaseStorage.getInstance().getReference();
+        final StorageReference storageRef = firebaseStorage.getReference();
+        final StorageReference uploadeRef = storageRef.child(toFilePath);
+        mprogreess.setMessage("Posting to Path");
         mprogreess.show();
         uploadeRef.putFile(fileUri).addOnFailureListener(new OnFailureListener() {
             public void onFailure(@NonNull Exception exception) {
@@ -107,7 +122,36 @@ public class Syllabus_upload_frag extends Fragment {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 //add file name to firestore database
                 addFileNameToDB(fileNme);
-                Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
+                /*Task<Uri> u = taskSnapshot.getStorage().getDownloadUrl();
+                final DatabaseReference newPost=mdatabase.push();
+                Map newImage = new HashMap();
+                newImage.put("tech_image", u.toString());
+                newPost.updateChildren(newImage);*/
+                final String ttname=filetitle.getText().toString().trim().toLowerCase();
+                final String tposition=filetype.getSelectedItem().toString().trim();
+                final DatabaseReference newPost=mdatabase.push();
+                newPost.child("file_title").setValue(ttname);
+                newPost.child("file_type").setValue(tposition);
+                uploadeRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Map newImage = new HashMap();
+                        newImage.put("file_link", uri.toString());
+                        newPost.updateChildren(newImage);
+
+                        //finish();
+                        return;
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        //finish();
+                        return;
+                    }
+                });
+
+
+
                 Toast.makeText(getActivity(),
                         "File has been uploaded to cloud storage",
                         Toast.LENGTH_SHORT).show();
@@ -115,6 +159,7 @@ public class Syllabus_upload_frag extends Fragment {
             }
         });
     }
+
 
     private String getFilePath(String fName) {
         File file;
@@ -129,7 +174,6 @@ public class Syllabus_upload_frag extends Fragment {
         }
         return null;
     }
-
     private void addFileNameToDB(final String fileNAME) {
         String docKey =fileNAME;    //userid+filename chilo
         Map<String, String> mp = new HashMap<String, String>();
@@ -160,5 +204,16 @@ public class Syllabus_upload_frag extends Fragment {
 
     private void restUi() {
         filePath.setText("");
+    }
+    private void setupSpinners() {
+        List<String> type = new ArrayList<>();
+        type.add("DOC");
+        type.add("PDF");
+        type.add("PPTX");
+        type.add("Others");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, type);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filetype.setAdapter(dataAdapter);
     }
 }
