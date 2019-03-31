@@ -81,7 +81,7 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
     static Button loginbutton;
     String email, pass;
     TextView success, fail;
-    LinearLayout loginp, adminp,techcsesection,campsection,campsetionad, sylopen, Holiopen;
+    LinearLayout loginp, adminp,techcsesection,campsection,campsetionad, sylopen, Holiopen, staffopen, applyadmin;
     private DrawerLayout myDrawer;
     private ActionBarDrawerToggle myToggle;
     private LinearLayout l1;
@@ -95,6 +95,7 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
     private DatabaseReference mdatabase;
     private ProgressDialog mprogreesdialog;
     private CardView logincard, logoutcard, adminpanelcard;
+    private TextView reg;
 
 
 
@@ -159,7 +160,6 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
         animatortranslate.setDuration(900);
         animatorSet.play(animatortranslate);
         animatorSet.start();*/
-
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -433,7 +433,20 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
         campsection=(LinearLayout) logindia.findViewById(R.id.campopen);
         sylopen=(LinearLayout) logindia.findViewById(R.id.syllabusopen);
         Holiopen=(LinearLayout)logindia.findViewById(R.id.holidaysopen);
+        staffopen=(LinearLayout)logindia.findViewById(R.id.staffopen);
+        reg=logindia.findViewById(R.id.notreg);
+        reg.setSelected(true);
+        reg.setText("\t \t \t \t \t \t"+"Not An Admin? Click Here."+"\t \t \t \t \t \t");
+        applyadmin=logindia.findViewById(R.id.adminsingup);
         final String email="ali", pass="123";
+        applyadmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Home.this, Adminapply.class);
+                startActivity(intent);
+                AzadIntentAnimation();
+            }
+        });
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -521,6 +534,7 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
                         //checkuserExitst();
                         adminvisible();
                         logincard.setVisibility(View.GONE);
+                        applyadmin.setVisibility(View.GONE);
                         logoutcard.setVisibility(View.VISIBLE);
                         adminpanelcard.setVisibility(View.VISIBLE);
 
@@ -531,6 +545,10 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
                     }
                 }
             });
+        }
+        else {
+            Toast.makeText(Home.this, "Empty field", Toast.LENGTH_SHORT).show();
+            mprogreesdialog.dismiss();
         }
     }
     public void checkuserExitst()
@@ -609,6 +627,13 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
                 startActivity(nextintent);
             }
         });
+        staffopen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextintent=new Intent(Home.this, StaffList.class);
+                startActivity(nextintent);
+            }
+        });
     }
     public void setAdminpanelcard()
     {
@@ -653,6 +678,15 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
                 //try{campusNews.visible();}catch (Exception ex){}
                 Intent nextintent=new Intent(Home.this, HolidaysNews.class);
                 nextintent.putExtras(bundle);
+                startActivity(nextintent);
+            }
+        });
+        staffopen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("login", "1");
+                Intent nextintent=new Intent(Home.this, StaffList.class);
                 startActivity(nextintent);
             }
         });
@@ -772,6 +806,7 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
         campsection=(LinearLayout) logindia.findViewById(R.id.campopen);
         sylopen=(LinearLayout) logindia.findViewById(R.id.syllabusopen);
         Holiopen=(LinearLayout)logindia.findViewById(R.id.holidaysopen);
+        staffopen=(LinearLayout)logindia.findViewById(R.id.staffopen);
         setAdminpanelcard();
     }
 

@@ -342,7 +342,7 @@ public class StaffList extends AppCompatActivity {
                     public void onClick(View v) {
                         final AlertDialog.Builder dialog = new AlertDialog.Builder(StaffList.this);
                         dialog.setMessage("Are you sure?");
-                        dialog.setTitle("Call to office");
+                        dialog.setTitle("Make A Call");
                         dialog.setIcon(android.R.drawable.ic_dialog_alert);
                         dialog.setCancelable(false);
                         dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {

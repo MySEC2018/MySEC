@@ -1,13 +1,19 @@
 package com.example.admin.mysecazadshushil;
 
+import android.Manifest;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -25,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -66,6 +73,8 @@ private FirebaseAuth mauth;
 private FirebaseAuth.AuthStateListener mauthlisten;
 private RadioButton search, cse, eee, ce;
 private Spinner tdept,position;
+private ImageView call;
+private int requst_call=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +101,7 @@ private Spinner tdept,position;
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         addingvisibility=(CardView) findViewById(R.id.cardvisibleadd);
         deletevisibility=(CardView) findViewById(R.id.cardvisibledelete);
+        call=findViewById(R.id.staff_call);
         try {
             Bundle bun = getIntent().getExtras();
             String val = bun.getString("login");
@@ -232,7 +242,7 @@ private Spinner tdept,position;
                 final String tech_key=getRef(position).getKey();
                 //final String tech_key=getRef(position).toString(); //for showing the database reading
 
-
+                final String numberfirebase=model.getTech_contact();
                 viewHolder.settechname(model.getTech_name());
                 viewHolder.settechposition(model.getTech_position());
                 viewHolder.settechcontact(model.getTech_contact());
@@ -250,6 +260,30 @@ private Spinner tdept,position;
                     public void onClick(View v) {
                         //Toast.makeText(TeachersListCSE.this,tech_key,Toast.LENGTH_LONG).show();
                         getkey.setText(tech_key.toString().trim());
+                    }
+                });
+                viewHolder.mView.findViewById(R.id.staff_call).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final AlertDialog.Builder dialog = new AlertDialog.Builder(TeachersListCSE.this);
+                        dialog.setMessage("Are you sure?");
+                        dialog.setTitle("Make A Call");
+                        dialog.setIcon(android.R.drawable.ic_dialog_alert);
+                        dialog.setCancelable(false);
+                        dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                calling(numberfirebase);
+                            }
+                        });
+                        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+
+                        dialog.show();
                     }
                 });
 
@@ -282,7 +316,7 @@ private Spinner tdept,position;
                 final String tech_key=getRef(position).getKey();
                 //final String tech_key=getRef(position).toString(); //for showing the database reading
 
-
+                final String numberfirebase=model.getTech_contact();
                 viewHolder.settechname(model.getTech_name());
                 viewHolder.settechposition(model.getTech_position());
                 viewHolder.settechcontact(model.getTech_contact());
@@ -300,6 +334,30 @@ private Spinner tdept,position;
                     public void onClick(View v) {
                        // Toast.makeText(TeachersListCSE.this,tech_key,Toast.LENGTH_LONG).show();
                         getkey.setText(tech_key.toString().trim());
+                    }
+                });
+                viewHolder.mView.findViewById(R.id.staff_call).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final AlertDialog.Builder dialog = new AlertDialog.Builder(TeachersListCSE.this);
+                        dialog.setMessage("Are you sure?");
+                        dialog.setTitle("Make A Call");
+                        dialog.setIcon(android.R.drawable.ic_dialog_alert);
+                        dialog.setCancelable(false);
+                        dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                calling(numberfirebase);
+                            }
+                        });
+                        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+
+                        dialog.show();
                     }
                 });
 
@@ -424,5 +482,45 @@ private Spinner tdept,position;
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, posi);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         position.setAdapter(dataAdapter2);
+    }
+    //call making
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==requst_call)
+        {
+            if(grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED)
+            {
+                FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<AddteacherListCSE, TeachercseViewholder>( AddteacherListCSE.class,
+                        R.layout.list_layout_teacher_cse,
+                        TeachercseViewholder.class,
+                        mdatabase)
+                {
+                    @Override
+                    protected void populateViewHolder(TeachercseViewholder viewHolder, AddteacherListCSE model, int position) {
+                        final String numberfirebase=model.getTech_contact();
+                        calling(numberfirebase);
+                    }
+                };
+            }
+            else{
+                Toast.makeText(this, "Permision Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public void calling(String numberfire)
+    {
+        String number=numberfire;
+        if(number.trim().length()>0)
+        {
+            if(ContextCompat.checkSelfPermission(TeachersListCSE.this,
+                    Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(TeachersListCSE.this,
+                        new String[]{Manifest.permission.CALL_PHONE},requst_call);
+            }else{
+                String dial="tel:"+number;
+                startActivity(new Intent(Intent.ACTION_CALL,Uri.parse(dial)));
+            }
+        }
     }
 }

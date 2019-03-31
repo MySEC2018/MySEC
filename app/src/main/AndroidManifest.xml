@@ -91,10 +91,10 @@
             android:parentActivityName=".Home" />
         <activity
             android:name=".Syllabus"
-            android:parentActivityName=".Home"></activity>
+            android:parentActivityName=".Home" />
         <activity
             android:name=".TeachersListCSE"
-            android:parentActivityName=".Home"></activity>
+            android:parentActivityName=".Home" />
         <activity
             android:name=".CGPA_calculator"
             android:parentActivityName=".Home" />
@@ -107,8 +107,12 @@
         <activity
             android:name=".ScheduleUpdateActivity"
             android:parentActivityName=".SchedulerActivity" />
-        <activity android:name=".StaffList"
-            android:parentActivityName=".Home"></activity>
+        <activity
+            android:name=".StaffList"
+            android:parentActivityName=".Home" />
+        <activity android:name=".Adminapply"
+            android:parentActivityName=".Home"
+            ></activity>
     </application>
 
 </manifest>
