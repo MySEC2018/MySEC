@@ -329,7 +329,7 @@ public class CampusNews extends AppCompatActivity {
                     .into(techcseimage);
             Picasso.with(ctx).setLoggingEnabled(true);*/
 
-            Picasso.get().load(image).centerCrop().placeholder(R.mipmap.ic_launcher).fit().into(campimage);
+            Picasso.get().load(image).centerCrop().placeholder(R.drawable.loading).fit().into(campimage);
 
 
         }

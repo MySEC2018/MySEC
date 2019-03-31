@@ -757,7 +757,7 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
     public void openadmnipanel(View view) {
         logindia=new Dialog(Home.this);
         logindia.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        logindia.setContentView(R.layout.activity_login);
+        logindia.setContentView(R.layout.adminpaneldialog);
         Window window = logindia.getWindow();
         window.setLayout(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT);
         logindia.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

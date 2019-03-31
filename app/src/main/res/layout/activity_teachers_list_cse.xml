@@ -99,15 +99,11 @@
                     android:background="@drawable/edittext_style_merged_focuseandnormal"
                     android:textColor="@color/MySECcolor"
                     />
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <Spinner
                     android:id="@+id/tech_position"
-                    android:hint="position"
-                    android:layout_margin="2dp"
-                    android:padding="5dp"
-                    android:background="@drawable/edittext_style_merged_focuseandnormal"
-                    android:textColor="@color/MySECcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="4dp"
                     />
                 <EditText
                     android:layout_width="match_parent"

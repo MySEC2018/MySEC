@@ -348,6 +348,7 @@
                         android:layout_width="wrap_content"
                         android:layout_margin="20dp"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         card_view:cardCornerRadius="4dp">
                         <LinearLayout
                             android:layout_width="match_parent"
