@@ -221,6 +221,12 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
                             startActivity(homeintent);
                             AzadIntentAnimation();
                         }
+                        if(menuItem.getItemId()==R.id.stafflist)
+                        {
+                            Intent homeintent=new Intent(Home.this, StaffList.class);
+                            startActivity(homeintent);
+                            AzadIntentAnimation();
+                        }
                         if(menuItem.getItemId()==R.id.holidays)
                         {
                             Intent homeintent=new Intent(Home.this, HolidaysNews.class);
