@@ -174,6 +174,8 @@ String currentUrl;
                 shareapp.putExtra(Intent.EXTRA_SUBJECT, "Copied URL");
                 startActivity(Intent.createChooser(shareapp, "Share url with your friends"));
                 break;
+            case R.id.webradio:
+                mysec.loadUrl("https://sec.ac.bd/campusradio/");
         }
         return super.onOptionsItemSelected(item);
     }

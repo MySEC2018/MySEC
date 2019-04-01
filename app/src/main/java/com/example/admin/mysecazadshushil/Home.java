@@ -15,6 +15,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -106,6 +108,10 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
         getSupportActionBar().setTitle("Welcome");
         Home.context = getApplicationContext();
         init();
+        if(isNetworkAvailable()==false)
+        {
+            Toast.makeText(Home.this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+        }
 
         //firebase auth
         mauth=FirebaseAuth.getInstance();
@@ -808,6 +814,12 @@ public class Home extends AppCompatActivity implements  DrawerLayout.DrawerListe
         Holiopen=(LinearLayout)logindia.findViewById(R.id.holidaysopen);
         staffopen=(LinearLayout)logindia.findViewById(R.id.staffopen);
         setAdminpanelcard();
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     @Override

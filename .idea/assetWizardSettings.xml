@@ -64,7 +64,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/editor/ic_insert_emoticon_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_radio_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -74,8 +74,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="05493f" />
-                            <entry key="outputName" value="adminsubmission" />
+                            <entry key="color" value="fefdff" />
+                            <entry key="outputName" value="radio" />
                             <entry key="sourceFile" value="C:\Users\admin" />
                           </map>
                         </option>

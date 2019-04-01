@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="5dp"
         android:id="@+id/syllabusvisiblein"
-        android:visibility="visible"
+        android:visibility="gone"
         >
     <LinearLayout
         android:layout_width="match_parent"

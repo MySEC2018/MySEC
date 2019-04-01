@@ -53,7 +53,7 @@
             android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="  email"
+            android:hint="  email(test@gmail.com)default user"
             android:drawableLeft="@drawable/email"
             android:ems="10"
             />
@@ -62,7 +62,7 @@
             android:id="@+id/login_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint=" password"
+            android:hint=" password(test123)"
             android:ems="10"
             android:drawableLeft="@drawable/password"
             android:inputType="textPassword"

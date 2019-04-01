@@ -45,8 +45,8 @@ public class Syllabus extends AppCompatActivity {
         addingvisibility=(CardView) findViewById(R.id.syllabusvisiblein);
         admindelvisible=(CardView) findViewById(R.id.syllabusvisibledel);
         uservisible=findViewById(R.id.syllabusvisibleuser);
-        //uservisible.setVisibility(View.VISIBLE);
-       /* mauth=FirebaseAuth.getInstance();
+        uservisible.setVisibility(View.VISIBLE);
+        mauth=FirebaseAuth.getInstance();
         mauthlisten=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -56,7 +56,7 @@ public class Syllabus extends AppCompatActivity {
                     admindelvisible.setVisibility(View.VISIBLE);
                 }
             }
-        };*/
+        };
 
         try {
             Bundle bun = getIntent().getExtras();
@@ -96,8 +96,8 @@ public class Syllabus extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //uservisible.setVisibility(View.VISIBLE);
-        //mauth.addAuthStateListener(mauthlisten);
+        uservisible.setVisibility(View.VISIBLE);
+        mauth.addAuthStateListener(mauthlisten);
     }
 
     @Override
