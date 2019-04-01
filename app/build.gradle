@@ -13,10 +13,11 @@ android {
     }
     signingConfigs {
         release {
-            //storeFile file("C:\\Users\\admin\\.android\\Key_Strore_path\\Azad_key_store.jks")
-            //storePassword "17343536"
-            // keyAlias "azad_key_alias_01"
-            //keyPassword "17343536"
+           //paste the keystore path, password
+            //storeFile file("")
+            //storePassword ""
+            // keyAlias ""
+            //keyPassword ""
         }
     }
     buildTypes {
