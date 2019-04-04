@@ -16,7 +16,25 @@
         android:id="@+id/tech_searchee"
         android:title="Only EEE" />
     <item
-        android:id="@+id/tech_searchce"
-        android:title="Only CE" />
+        android:id="@+id/Professor"
+        android:title="Professor" />
+     <item
+            android:id="@+id/Professor_Head"
+            android:title="Professor and Head" />
+        <item
+            android:id="@+id/Head"
+            android:title="Head" />
+        <item
+            android:id="@+id/Associate_Professor"
+            android:title="Associate Professor" />
+        <item
+            android:id="@+id/Assistant_Professor"
+            android:title="Assistant Professor" />
+        <item
+            android:id="@+id/Lecturer"
+            android:title="Lecturer" />
+        <item
+            android:id="@+id/Principle"
+            android:title="Principle" />
     </group>
 </menu>

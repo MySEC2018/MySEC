@@ -176,6 +176,10 @@ String currentUrl;
                 break;
             case R.id.webradio:
                 mysec.loadUrl("https://sec.ac.bd/campusradio/");
+                break;
+            case R.id.webgoogle:
+                mysec.loadUrl("https://www.google.com/");
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

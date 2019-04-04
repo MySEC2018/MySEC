@@ -457,6 +457,49 @@ private int requst_call=1;
                 String orderchild3="tech_dept";
                 searchteacherlist(searchtext3, orderchild3);
                 return true;
+            case R.id.Lecturer:
+                item.setChecked(true);
+                String searchtext11="Lecturer";
+                String orderchild11="tech_position";
+                searchteacherlist(searchtext11, orderchild11);
+                return true;
+            case R.id.Professor:
+                item.setChecked(true);
+                String searchtext4="Professor";
+                String orderchild4="tech_position";
+                searchteacherlist(searchtext4, orderchild4);
+                return true;
+            case R.id.Assistant_Professor:
+                item.setChecked(true);
+                String searchtext5="Assistant Professor";
+                String orderchild5="tech_position";
+                searchteacherlist(searchtext5, orderchild5);
+                return true;
+            case R.id.Associate_Professor:
+                item.setChecked(true);
+                String searchtext6="Associate Professor";
+                String orderchild6="tech_position";
+                searchteacherlist(searchtext6, orderchild6);
+                return true;
+            case R.id.Head:
+                item.setChecked(true);
+                String searchtext7="Head";
+                String orderchild7="tech_position";
+                searchteacherlist(searchtext7, orderchild7);
+                return true;
+            case R.id.Professor_Head:
+                item.setChecked(true);
+                String searchtext8="Professor & Head";
+                String orderchild8="tech_position";
+                searchteacherlist(searchtext8, orderchild8);
+                return true;
+            case R.id.Principle:
+                item.setChecked(true);
+                String searchtext9="Principle";
+                String orderchild9="tech_position";
+                searchteacherlist(searchtext9, orderchild9);
+                return true;
+                //tech_position
         }
         return super.onOptionsItemSelected(item);
     }
@@ -478,6 +521,7 @@ private int requst_call=1;
         posi.add("Associate Professor");
         posi.add("Assistant Professor");
         posi.add("Lecturer");
+        posi.add("Principle");
 
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, posi);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

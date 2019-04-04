@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".TeachersListCSE"
+    tools:context=".StaffList"
     >
     <group android:checkableBehavior="single">
         <item
@@ -18,5 +18,17 @@
         <item
             android:id="@+id/tech_searchce"
             android:title="Only CE" />
+        <item
+            android:id="@+id/staff"
+            android:title="Staff" />
+        <item
+            android:id="@+id/lab_assistant"
+            android:title="Lab Assistant" />
+        <item
+            android:id="@+id/Tech_staff"
+            android:title="Technical staff" />
+        <item
+            android:id="@+id/other"
+            android:title="Others" />
     </group>
 </menu>

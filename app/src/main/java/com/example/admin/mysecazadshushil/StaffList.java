@@ -462,6 +462,30 @@ public class StaffList extends AppCompatActivity {
                 String orderchild3="staff_dept";
                 searchteacherlist(searchtext3, orderchild3);
                 return true;
+            case R.id.staff:
+                item.setChecked(true);
+                String searchtext4="Staff";
+                String orderchild4="staff_positon";
+                searchteacherlist(searchtext4, orderchild4);
+                return true;
+            case R.id.lab_assistant:
+                item.setChecked(true);
+                String searchtext5="Lab Assistant";
+                String orderchild5="staff_positon";
+                searchteacherlist(searchtext5, orderchild5);
+                return true;
+            case R.id.Tech_staff:
+                item.setChecked(true);
+                String searchtext6="Technical staff";
+                String orderchild6="staff_positon";
+                searchteacherlist(searchtext6, orderchild6);
+                return true;
+            case R.id.other:
+                item.setChecked(true);
+                String searchtext7="Others";
+                String orderchild7="staff_positon";
+                searchteacherlist(searchtext7, orderchild7);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

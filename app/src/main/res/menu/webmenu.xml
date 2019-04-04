@@ -33,4 +33,8 @@
         android:icon="@drawable/shareicon"
         android:id="@+id/webshare"
         />
+    <item android:title="Google"
+        android:icon="@drawable/webicon"
+        android:id="@+id/webgoogle"
+        />
 </menu>
