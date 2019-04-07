@@ -15,6 +15,9 @@
     <item
         android:id="@+id/tech_searchee"
         android:title="Only EEE" />
+        <item
+            android:id="@+id/tech_searchce"
+            android:title="Only CE" />
     <item
         android:id="@+id/Professor"
         android:title="Professor" />
