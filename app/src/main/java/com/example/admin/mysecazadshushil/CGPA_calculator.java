@@ -34,6 +34,7 @@ public class CGPA_calculator extends AppCompatActivity {
     double[] credits = new double[11];
     double[] sgpas = new double[11];
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class CGPA_calculator extends AppCompatActivity {
             credits[i]=0;
             sgpas[i]=0;
         }
+
         layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         newSemesterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +70,13 @@ public class CGPA_calculator extends AppCompatActivity {
                         )
                 {
                     Toast.makeText(CGPA_calculator.this, "Fields empty error", Toast.LENGTH_SHORT).show();
+                }
+                else if( (j==1 && Double.parseDouble(sgpaOne.getText().toString())>=4.1) || (j==2 &&Double.parseDouble(sgpaTwo.getText().toString())>=4.1)
+                        || (j==3 && Double.parseDouble(sgpaThree.getText().toString())>=4.1) || (j==4 && Double.parseDouble(sgpaFour.getText().toString())>=4.1)
+                        || (j==5 && Double.parseDouble(sgpaFive.getText().toString())>=4.1)|| (j==6 && Double.parseDouble(sgpaSix.getText().toString())>=4.1)
+                        || (j==7 && Double.parseDouble(sgpaSeven.getText().toString())>=4.1) || (j==8 && Double.parseDouble(sgpaEight.getText().toString())>=4.1))
+                {
+                    Toast.makeText(CGPA_calculator.this, "CGPA can't be more than 4.0", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     calculateCgpa();
@@ -157,25 +166,6 @@ public class CGPA_calculator extends AppCompatActivity {
             sgpas[6] = Double.parseDouble(sgpaSeven.getText().toString());
             credits[7] = Double.parseDouble(creditEight.getText().toString());
             sgpas[7] = Double.parseDouble(sgpaEight.getText().toString());
-        } else if (j == 9) {
-            credits[0] = Double.parseDouble(creditOne.getText().toString());
-            sgpas[0] = Double.parseDouble(sgpaOne.getText().toString());
-            credits[1] = Double.parseDouble(creditTwo.getText().toString());
-            sgpas[1] = Double.parseDouble(sgpaTwo.getText().toString());
-            credits[2] = Double.parseDouble(creditThree.getText().toString());
-            sgpas[2] = Double.parseDouble(sgpaThree.getText().toString());
-            credits[3] = Double.parseDouble(creditFour.getText().toString());
-            sgpas[3] = Double.parseDouble(sgpaFour.getText().toString());
-            credits[4] = Double.parseDouble(creditFive.getText().toString());
-            sgpas[4] = Double.parseDouble(sgpaFive.getText().toString());
-            credits[5] = Double.parseDouble(creditSix.getText().toString());
-            sgpas[5] = Double.parseDouble(sgpaSix.getText().toString());
-            credits[6] = Double.parseDouble(creditSeven.getText().toString());
-            sgpas[6] = Double.parseDouble(sgpaSeven.getText().toString());
-            credits[7] = Double.parseDouble(creditEight.getText().toString());
-            sgpas[7] = Double.parseDouble(sgpaEight.getText().toString());
-            credits[8] = Double.parseDouble(creditNine.getText().toString());
-            sgpas[8] = Double.parseDouble(sgpaNine.getText().toString());
         }
     }
     private void calculateCgpa() {
@@ -216,7 +206,7 @@ public class CGPA_calculator extends AppCompatActivity {
         //dialogFragment.getActivity().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
-       // Toast.makeText(this, String.valueOf(finalCgpa), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, String.valueOf(finalCgpa), Toast.LENGTH_SHORT).show();
     }
 
     private void init() {

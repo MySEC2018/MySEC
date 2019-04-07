@@ -132,20 +132,10 @@ public class SchedulerActivity extends AppCompatActivity {
         };
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.scheduler_menu, menu);
-//        return true;
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-//            case R.id.menu_refresh:
-//                Toast.makeText(getApplicationContext(), "Refresh", Toast.LENGTH_SHORT).show();
-//                break;
             case android.R.id.home:
                 finish();
                 break;
